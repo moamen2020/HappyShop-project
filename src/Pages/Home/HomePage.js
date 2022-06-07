@@ -5,6 +5,7 @@ import NavBarLogin from '../../Components/Utility/NavBarLogin'
 import CardProductsContainer from '../../Components/Products/CardProductsContainer'
 import DiscountSection from '../../Components/Home/DiscountSection'
 import BrandFeatured from '../../Components/Brand/BrandFeatured'
+import Footer from '../../Components/Utility/Footer'
 
 const HomePage = () => {
   return (
@@ -16,6 +17,7 @@ const HomePage = () => {
       <DiscountSection />
       <CardProductsContainer title='أحدث الأزياء' btntitle='المزيد' />
       <BrandFeatured title="اشهر الماركات" btntitle="المزيد" pathText='brand' />
+      <Footer />
     </div>
   )
 }
