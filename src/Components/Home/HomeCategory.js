@@ -1,5 +1,4 @@
 import React from "react";
-import { Col } from "react-bootstrap";
 import { Container, Row } from "react-bootstrap";
 import clothe from "../../images/clothe.png";
 import cat2 from "../../images/cat2.png";
