@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Card, Col } from "react-bootstrap";
+import { Card, Col } from "react-bootstrap";
 const BrandCard = ({ img }) => {
   return (
     <Col
@@ -7,7 +7,8 @@ const BrandCard = ({ img }) => {
       sm="6"
       md="4"
       lg="2"
-      className="my-2 d-flex justify-content-center">
+      className="my-2 d-flex justify-content-center"
+    >
       <Card
         className="my-1"
         style={{
@@ -16,7 +17,8 @@ const BrandCard = ({ img }) => {
           borderRadius: "8px",
           border: "none",
           backgroundColor: "#FFFFFF",
-        }}>
+        }}
+      >
         <Card.Img style={{ width: "100%", height: "151px" }} src={img} />
       </Card>
     </Col>

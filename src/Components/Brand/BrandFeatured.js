@@ -1,5 +1,4 @@
-import React, { useState, useRef } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import BrandCard from "./BrandCard";
 import SubTitle from "../Utility/SubTitle.js";
 import brand1 from "../../images/brand1.png";

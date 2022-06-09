@@ -1,5 +1,4 @@
-import React, { useState, useRef } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import BrandCard from "./BrandCard";
 import brand1 from "../../images/brand1.png";
 import brand2 from "../../images/brand2.png";

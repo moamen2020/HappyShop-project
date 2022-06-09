@@ -6,6 +6,7 @@ import Footer from "./Components/Utility/Footer";
 import LoginPage from "./Pages/Auth/LoginPage";
 import Rigester from "./Pages/Auth/RigesterPage";
 import AllCategoryList from "./Pages/Category/AllCategoryList";
+import AllBrandPage from "./Pages/Brand/AllBrandPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<Rigester />} />
           <Route path="/allcategory" element={<AllCategoryList />} />
+          <Route path="/brand" element={<AllBrandPage />} />
         </Routes>
       </BrowserRouter>
       <Footer />

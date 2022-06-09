@@ -9,10 +9,22 @@ const HomePage = () => {
   return (
     <div className="font" style={{ minHeight: "670px" }}>
       <Slider />
-      <HomeCategory />
-      <CardProductsContainer title="الأكثر مبيعاً" btntitle="المزيد" />
+      <HomeCategory
+        title=" التصنيفات"
+        btntitle="المزيد"
+        pathText="/allcategory"
+      />
+      <CardProductsContainer
+        title="الأكثر مبيعاً"
+        btntitle="المزيد"
+        pathText="/products"
+      />
       <DiscountSection />
-      <CardProductsContainer title="أحدث الأزياء" btntitle="المزيد" />
+      <CardProductsContainer
+        title="أحدث الأزياء"
+        btntitle="المزيد"
+        pathText=""
+      />
       <BrandFeatured title="اشهر الماركات" btntitle="المزيد" pathText="brand" />
     </div>
   );

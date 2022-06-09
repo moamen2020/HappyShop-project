@@ -7,10 +7,10 @@ import sale from "../../images/sale.png";
 import pic from "../../images/pic.png";
 import CategoryCard from "../Category/CategoryCard";
 import SubTitle from "../Utility/SubTitle";
-const HomeCategory = () => {
+const HomeCategory = ({ title, btntitle, pathText }) => {
   return (
     <Container>
-      <SubTitle title=" التصنيفات" btntitle="المزيد" pathText="/allcategory" />
+      <SubTitle title={title} btntitle={btntitle} pathText={pathText} />
       <Row className="my-2 d-flex  justify-content-between">
         <CategoryCard img={clothe} background="#F4DBA5" />
         <CategoryCard img={cat2} background="#0034FF" />
@@ -23,4 +23,4 @@ const HomeCategory = () => {
   );
 };
 
-export default HomeCategory
+export default HomeCategory;
