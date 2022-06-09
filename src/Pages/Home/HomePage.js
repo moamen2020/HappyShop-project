@@ -23,7 +23,7 @@ const HomePage = () => {
       <CardProductsContainer
         title="أحدث الأزياء"
         btntitle="المزيد"
-        pathText=""
+        pathText="/products"
       />
       <BrandFeatured title="اشهر الماركات" btntitle="المزيد" pathText="brand" />
     </div>
