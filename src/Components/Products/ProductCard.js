@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Card, Col } from "react-bootstrap";
+import { Card, Col } from "react-bootstrap";
 import prod1 from "../../images/item.png";
 import favoff from "../../images/fav-off.png";
 import rate from "../../images/rate.png";
@@ -11,7 +11,8 @@ const ProductCard = ({ title }) => {
         to="/products/:id"
         style={{
           textDecoration: "none",
-        }}>
+        }}
+      >
         <Card
           className="my-2"
           style={{
@@ -21,7 +22,8 @@ const ProductCard = ({ title }) => {
             border: "none",
             backgroundColor: "#FFFFFF",
             boxShadow: "0 2px 2px 0 rgba(151,151,151,0.5)",
-          }}>
+          }}
+        >
           <Card.Img style={{ height: "228px", width: "100%" }} src={prod1} />
           <div className="d-flex justify-content-end mx-2">
             <img
