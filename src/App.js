@@ -14,7 +14,8 @@ import ChoosePayMethoudPage from "./Pages/Checkout/ChoosePayMethoudPage";
 import AdminAllProductsPage from "./Pages/Admin/AdminAllProductsPage";
 import AdminAllOrderPage from "./Pages/Admin/AdminAllOrderPage";
 import AdminOrderDetalisPage from "./Pages/Admin/AdminOrderDetalisPage";
-
+import AdminAddBrandPage from "./Pages/Admin/AdminAddBrandPage";
+import AdminAddCategoryPage from "./Pages/Admin/AdminAddCategoryPage";
 function App() {
   return (
     <div className="font">
@@ -33,6 +34,8 @@ function App() {
           <Route path="/admin/allproducts" element={<AdminAllProductsPage />} />
           <Route path="/admin/allorders" element={<AdminAllOrderPage />} />
           <Route path="/admin/orders/:id" element={<AdminOrderDetalisPage />} />
+          <Route path="/admin/addbrand" element={<AdminAddBrandPage />} />
+          <Route path="/admin/addcategory" element={<AdminAddCategoryPage />} />
         </Routes>
       </BrowserRouter>
       <Footer />
