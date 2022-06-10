@@ -18,6 +18,11 @@ import AdminAddBrandPage from "./Pages/Admin/AdminAddBrandPage";
 import AdminAddCategoryPage from "./Pages/Admin/AdminAddCategoryPage";
 import AdminAddSubCategoryPage from "./Pages/Admin/AdminSubCategoryPage";
 import AdminAddProductsPage from "./Pages/Admin/AdminAddProductsPage";
+import UserProfilePage from "./Pages/User/UserProfilePage";
+import UserAllOrdersPage from "./Pages/User/UserAllOrdersPage";
+import UserFavoritePage from "./Pages/User/UserFavoritePage";
+import UserAddAddressPage from "./Pages/User/UserAddAddressPage";
+
 function App() {
   return (
     <div className="font">
@@ -43,6 +48,11 @@ function App() {
             element={<AdminAddSubCategoryPage />}
           />
           <Route path="/admin/addproducts" element={<AdminAddProductsPage />} />
+
+          <Route path="/user/all-orders" element={<UserAllOrdersPage />} />
+          <Route path="/user/favorite" element={<UserFavoritePage />} />
+          <Route path="/user/address" element={<UserAddAddressPage />} />
+          <Route path="/user/user-profile" element={<UserProfilePage />} />
         </Routes>
       </BrowserRouter>
       <Footer />
