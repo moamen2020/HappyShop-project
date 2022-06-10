@@ -11,6 +11,7 @@ import ShopProductsPage from "./Pages/Products/ShopProductsPage";
 import ProductDetalisPage from "./Pages/Products/ProductDetalisPage";
 import CartPage from "./Pages/Cart/CartPage";
 import ChoosePayMethoudPage from "./Pages/Checkout/ChoosePayMethoudPage";
+import AdminAllProductsPage from "./Pages/Admin/AdminAllProductsPage";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/products/:id" element={<ProductDetalisPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/order/paymethoud" element={<ChoosePayMethoudPage />} />
+          <Route path="/admin/allproducts" element={<AdminAllProductsPage />} />
         </Routes>
       </BrowserRouter>
       <Footer />
