@@ -17,6 +17,7 @@ import AdminOrderDetalisPage from "./Pages/Admin/AdminOrderDetalisPage";
 import AdminAddBrandPage from "./Pages/Admin/AdminAddBrandPage";
 import AdminAddCategoryPage from "./Pages/Admin/AdminAddCategoryPage";
 import AdminAddSubCategoryPage from "./Pages/Admin/AdminSubCategoryPage";
+import AdminAddProductsPage from "./Pages/Admin/AdminAddProductsPage";
 function App() {
   return (
     <div className="font">
@@ -41,6 +42,7 @@ function App() {
             path="/admin/addsubcategory"
             element={<AdminAddSubCategoryPage />}
           />
+          <Route path="/admin/addproducts" element={<AdminAddProductsPage />} />
         </Routes>
       </BrowserRouter>
       <Footer />
