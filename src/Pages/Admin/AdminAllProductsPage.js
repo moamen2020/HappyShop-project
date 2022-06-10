@@ -2,6 +2,7 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import AdminSideBar from "../../Components/Admin/AdminSideBar";
 import AdminAllProducts from "../../Components/Admin/AdminAllProducts";
+import PaginationComponent from "../../Components/Utility/Pagination";
 
 const AdminAllProductsPage = () => {
   return (
@@ -12,6 +13,7 @@ const AdminAllProductsPage = () => {
         </Col>
         <Col sm="9" xs="10" md="10">
           <AdminAllProducts />
+          <PaginationComponent />
         </Col>
       </Row>
     </Container>

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
 
-const PaginationCompontent = () => {
+const PaginationComponent = () => {
   const handlePageClick = () => {};
 
   return (
@@ -27,4 +27,4 @@ const PaginationCompontent = () => {
   );
 };
 
-export default PaginationCompontent;
+export default PaginationComponent;
