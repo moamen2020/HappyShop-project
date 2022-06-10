@@ -16,6 +16,7 @@ import AdminAllOrderPage from "./Pages/Admin/AdminAllOrderPage";
 import AdminOrderDetalisPage from "./Pages/Admin/AdminOrderDetalisPage";
 import AdminAddBrandPage from "./Pages/Admin/AdminAddBrandPage";
 import AdminAddCategoryPage from "./Pages/Admin/AdminAddCategoryPage";
+import AdminAddSubCategoryPage from "./Pages/Admin/AdminSubCategoryPage";
 function App() {
   return (
     <div className="font">
@@ -36,6 +37,10 @@ function App() {
           <Route path="/admin/orders/:id" element={<AdminOrderDetalisPage />} />
           <Route path="/admin/addbrand" element={<AdminAddBrandPage />} />
           <Route path="/admin/addcategory" element={<AdminAddCategoryPage />} />
+          <Route
+            path="/admin/addsubcategory"
+            element={<AdminAddSubCategoryPage />}
+          />
         </Routes>
       </BrowserRouter>
       <Footer />
