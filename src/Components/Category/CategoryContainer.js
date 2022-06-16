@@ -1,40 +1,47 @@
-import React from "react";
-import { Container, Row } from "react-bootstrap";
-import clothe from "../../images/clothe.png";
-import cat2 from "../../images/cat2.png";
-import labtop from "../../images/labtop.png";
-import sale from "../../images/sale.png";
-import pic from "../../images/pic.png";
+import React, { useEffect } from "react";
+import { Container, Row, Spinner } from "react-bootstrap";
 import CategoryCard from "../Category/CategoryCard";
 
+import { useDispatch, useSelector } from "react-redux";
+import { getAllCategory } from "../../Redux/action/categoryAction";
+
 const CategoryContainer = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllCategory());
+  }, []);
+
+  const category = useSelector((state) => state.allCategory.category);
+  const loading = useSelector((state) => state.allCategory.loading);
+
+  const colors = [
+    "#FFD3E8",
+    "#F4DBA5",
+    "#55CFDF",
+    "#FF6262",
+    "#0034FF",
+    "#FFD3E8",
+  ];
   return (
     <Container>
       <div className="admin-content-text mt-3">كل التصنيفات</div>
       <Row className="my-2 d-flex  justify-content-between">
-        <CategoryCard img={clothe} background="#F4DBA5" />
-        <CategoryCard img={cat2} background="#0034FF" />
-        <CategoryCard img={labtop} background="#FFD3E8" />
-        <CategoryCard img={clothe} background="#55CFDF" />
-        <CategoryCard img={sale} background="#FF6262" />
-        <CategoryCard img={pic} background="#F4DBA5" />
-        <CategoryCard img={labtop} background="#FFD3E8" />
-        <CategoryCard img={clothe} background="#55CFDF" />
-        <CategoryCard img={sale} background="#FF6262" />
-        <CategoryCard img={pic} background="#F4DBA5" />
-        <CategoryCard img={labtop} background="#FFD3E8" />
-        <CategoryCard img={clothe} background="#55CFDF" />
-        <CategoryCard img={sale} background="#FF6262" />
-        <CategoryCard img={pic} background="#F4DBA5" />
-        <CategoryCard img={labtop} background="#FFD3E8" />
-        <CategoryCard img={clothe} background="#55CFDF" />
-        <CategoryCard img={sale} background="#FF6262" />
-        <CategoryCard img={pic} background="#F4DBA5" />
-        <CategoryCard img={labtop} background="#FFD3E8" />
-        <CategoryCard img={clothe} background="#55CFDF" />
-        <CategoryCard img={sale} background="#FF6262" />
-        <CategoryCard img={pic} background="#F4DBA5" />
-        <CategoryCard img={clothe} background="#55CFDF" />
+        {category.data ? (
+          category.data.map((item, index) => {
+            return (
+              <CategoryCard
+                key={index}
+                title={item.name}
+                img={item.image}
+                background={colors[index]}
+              />
+            );
+          })
+        ) : (
+          <h3>لا يوجد تصنيفات</h3>
+        )}
+        {loading && <Spinner animation="border" variant="primary" />}
       </Row>
     </Container>
   );

@@ -29,9 +29,10 @@ const HomeCategory = ({ title, btntitle, pathText }) => {
       <SubTitle title={title} btntitle={btntitle} pathText={pathText} />
       <Row className="my-2 d-flex  justify-content-between">
         {category.data ? (
-          category.data.slice(0, 5).map((item, index) => {
+          category.data.slice(0, 2).map((item, index) => {
             return (
               <CategoryCard
+                key={index}
                 title={item.name}
                 img={item.image}
                 background={colors[index]}
