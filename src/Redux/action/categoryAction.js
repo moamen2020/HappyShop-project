@@ -18,3 +18,22 @@ export const getAllCategory = (limit) => async (dispatch) => {
     });
   }
 };
+
+export const getAllCategoryPage = (page) => async (dispatch) => {
+  try {
+    const response = await useGetData(
+      `/api/v1/categories?limit=3&page=${page}`
+    );
+    console.log(response);
+
+    dispatch({
+      type: GET_ALL_CATEGORY,
+      payload: response,
+    });
+  } catch (e) {
+    dispatch({
+      type: GET_ERROR,
+      payload: "Error " + e,
+    });
+  }
+};
