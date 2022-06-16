@@ -28,21 +28,24 @@ const HomeCategory = ({ title, btntitle, pathText }) => {
     <Container>
       <SubTitle title={title} btntitle={btntitle} pathText={pathText} />
       <Row className="my-2 d-flex  justify-content-between">
-        {category.data ? (
-          category.data.slice(0, 2).map((item, index) => {
-            return (
-              <CategoryCard
-                key={index}
-                title={item.name}
-                img={item.image}
-                background={colors[index]}
-              />
-            );
-          })
+        {loading === false ? (
+          category.data ? (
+            category.data.slice(0, 3).map((item, index) => {
+              return (
+                <CategoryCard
+                  key={index}
+                  title={item.name}
+                  img={item.image}
+                  background={colors[index]}
+                />
+              );
+            })
+          ) : (
+            <h3>لا يوجد تصنيفات</h3>
+          )
         ) : (
-          <h3>لا يوجد تصنيفات</h3>
+          <Spinner animation="border" variant="primary" />
         )}
-        {loading && <Spinner animation="border" variant="primary" />}
       </Row>
     </Container>
   );

@@ -1,20 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Container, Row, Spinner } from "react-bootstrap";
 import CategoryCard from "../Category/CategoryCard";
 
-import { useDispatch, useSelector } from "react-redux";
-import { getAllCategory } from "../../Redux/action/categoryAction";
-
-const CategoryContainer = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAllCategory());
-  }, []);
-
-  const category = useSelector((state) => state.allCategory.category);
-  const loading = useSelector((state) => state.allCategory.loading);
-
+const CategoryContainer = ({ data, loading }) => {
   const colors = [
     "#FFD3E8",
     "#F4DBA5",
@@ -23,25 +11,29 @@ const CategoryContainer = () => {
     "#0034FF",
     "#FFD3E8",
   ];
+
   return (
     <Container>
       <div className="admin-content-text mt-3">كل التصنيفات</div>
       <Row className="my-2 d-flex  justify-content-between">
-        {category.data ? (
-          category.data.map((item, index) => {
-            return (
-              <CategoryCard
-                key={index}
-                title={item.name}
-                img={item.image}
-                background={colors[index]}
-              />
-            );
-          })
+        {loading === false ? (
+          data.data ? (
+            data.data.map((item, index) => {
+              return (
+                <CategoryCard
+                  key={index}
+                  title={item.name}
+                  img={item.image}
+                  background={colors[index]}
+                />
+              );
+            })
+          ) : (
+            <h3>لا يوجد تصنيفات</h3>
+          )
         ) : (
-          <h3>لا يوجد تصنيفات</h3>
+          <Spinner animation="border" variant="primary" />
         )}
-        {loading && <Spinner animation="border" variant="primary" />}
       </Row>
     </Container>
   );
