@@ -17,8 +17,8 @@ const CategoryContainer = ({ data, loading }) => {
       <div className="admin-content-text mt-3">كل التصنيفات</div>
       <Row className="my-2 d-flex  justify-content-between">
         {loading === false ? (
-          data.data ? (
-            data.data.map((item, index) => {
+          data ? (
+            data.map((item, index) => {
               return (
                 <CategoryCard
                   key={index}

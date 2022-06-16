@@ -28,7 +28,7 @@ const AllCategoryList = () => {
 
   return (
     <div style={{ minHeight: "670px" }}>
-      <CategoryContainer data={category} loading={loading} />
+      <CategoryContainer data={category.data} loading={loading} />
       {pageCount > 1 ? (
         <PaginationCompontent
           pageCount={category.paginationResult.numberOfPages}
