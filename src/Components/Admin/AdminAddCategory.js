@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Spinner } from "react-bootstrap";
 import avatar from "../../images/avatar.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createCategoryPage } from "../../Redux/action/categoryAction";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AdminAddCategory = () => {
   const [img, setImg] = useState(avatar);
@@ -20,9 +22,22 @@ const AdminAddCategory = () => {
     }
   };
 
+  const res = useSelector((state) => state.allCategory);
+
+  const notify = (msg, type) => {
+    if (type === "warn") toast.warn(msg);
+    if (type === "success") toast.success(msg);
+    if (type === "error") toast.error(msg);
+  };
+
   // Save data in database
   const handelSubmit = async (event) => {
     event.preventDefault();
+
+    if (name === "" || selectedFile === null) {
+      notify("من فضلك اكمل البيانات", "warn");
+      return;
+    }
     const formData = new FormData();
     formData.append("name", name);
     formData.append("image", selectedFile);
@@ -41,8 +56,14 @@ const AdminAddCategory = () => {
       console.log("تم الإنتهاء");
       setLoading(true);
       setIsPress(false);
+
+      if (res.status === 201) {
+        notify("تم الإضافة بنجاح", "success");
+      } else {
+        notify("هناك مشكلة في عملية الإضافة", "error");
+      }
     }
-  }, [loading]);
+  }, [loading, res.status]);
 
   return (
     <div>
@@ -90,6 +111,7 @@ const AdminAddCategory = () => {
           <h4>تم الإنتهاء</h4>
         )
       ) : null}
+      <ToastContainer />
     </div>
   );
 };

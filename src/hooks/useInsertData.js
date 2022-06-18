@@ -5,7 +5,7 @@ const useInsertDataWithImage = async (url, parmas) => {
     headers: { "Content-Type": "multipart/form-data" },
   };
   const res = await baseURL.post(url, parmas, config);
-  return res.data;
+  return res;
 };
 
 const useInsertData = async (url, parmas) => {
