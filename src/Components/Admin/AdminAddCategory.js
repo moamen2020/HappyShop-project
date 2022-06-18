@@ -1,18 +1,30 @@
 import React, { useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import avatar from "../../images/avatar.png";
+import { useDispatch, useSelector } from "react-redux";
+import { createCategoryPage } from "../../Redux/action/categoryAction";
+
 const AdminAddCategory = () => {
+  const dispatch = useDispatch();
+
   const [img, setImg] = useState(avatar);
   const [name, setName] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       setImg(URL.createObjectURL(event.target.files[0]));
+      setSelectedFile(event.target.files[0]);
     }
   };
 
   const handelSubmit = (event) => {
     event.preventDefault();
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("image", selectedFile);
+
+    dispatch(createCategoryPage(formData));
   };
   return (
     <div>
