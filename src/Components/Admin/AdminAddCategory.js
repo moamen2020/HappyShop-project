@@ -3,8 +3,8 @@ import { Row, Col, Spinner } from "react-bootstrap";
 import avatar from "../../images/avatar.png";
 import { useDispatch, useSelector } from "react-redux";
 import { createCategoryPage } from "../../Redux/action/categoryAction";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import notify from "../../hook/useNotifaction";
 
 const AdminAddCategory = () => {
   const [img, setImg] = useState(avatar);
@@ -23,12 +23,6 @@ const AdminAddCategory = () => {
   };
 
   const res = useSelector((state) => state.allCategory);
-
-  const notify = (msg, type) => {
-    if (type === "warn") toast.warn(msg);
-    if (type === "success") toast.success(msg);
-    if (type === "error") toast.error(msg);
-  };
 
   // Save data in database
   const handelSubmit = async (event) => {
