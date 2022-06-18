@@ -1,15 +1,17 @@
-import React, { useState } from "react";
-import { Row, Col } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Row, Col, Spinner } from "react-bootstrap";
 import avatar from "../../images/avatar.png";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { createCategoryPage } from "../../Redux/action/categoryAction";
 
 const AdminAddCategory = () => {
-  const dispatch = useDispatch();
-
   const [img, setImg] = useState(avatar);
   const [name, setName] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [isPress, setIsPress] = useState(false);
+
+  const dispatch = useDispatch();
 
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
@@ -18,14 +20,30 @@ const AdminAddCategory = () => {
     }
   };
 
-  const handelSubmit = (event) => {
+  // Save data in database
+  const handelSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
     formData.append("name", name);
     formData.append("image", selectedFile);
 
-    dispatch(createCategoryPage(formData));
+    setLoading(true);
+    setIsPress(true);
+    await dispatch(createCategoryPage(formData));
+    setLoading(false);
   };
+
+  useEffect(() => {
+    if (!loading) {
+      setImg(avatar);
+      setName("");
+      setSelectedFile(null);
+      console.log("تم الإنتهاء");
+      setLoading(true);
+      setIsPress(false);
+    }
+  }, [loading]);
+
   return (
     <div>
       <Row className="justify-content-start ">
@@ -65,6 +83,13 @@ const AdminAddCategory = () => {
           </button>
         </Col>
       </Row>
+      {isPress ? (
+        loading ? (
+          <Spinner animation="border" variant="primary" />
+        ) : (
+          <h4>تم الإنتهاء</h4>
+        )
+      ) : null}
     </div>
   );
 };
