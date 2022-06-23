@@ -6,7 +6,6 @@ import { GET_ALL_BRAND, GET_ERROR, CREATE_BRAND } from "../type";
 export const getAllBrand = (limit) => async (dispatch) => {
   try {
     const response = await useGetData(`/api/v1/brands?limit=${limit}`);
-    console.log(response);
 
     dispatch({
       type: GET_ALL_BRAND,
