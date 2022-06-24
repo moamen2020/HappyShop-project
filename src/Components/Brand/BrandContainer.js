@@ -1,38 +1,23 @@
-import { Container, Row } from "react-bootstrap";
+import { Container, Row, Spinner } from "react-bootstrap";
 import BrandCard from "./BrandCard";
-import brand1 from "../../images/brand1.png";
-import brand2 from "../../images/brand2.png";
-import brand3 from "../../images/brand3.png";
-const BrandContainer = () => {
+const BrandContainer = ({ data, loading }) => {
+  console.log(data);
   return (
     <div className="my-3">
       <Container>
         <div className="admin-content-text ">كل الماركات</div>
         <Row className="my-1 justify-content-between">
-          <BrandCard img={brand1} />
-          <BrandCard img={brand2} />
-          <BrandCard img={brand3} />
-          <BrandCard img={brand2} />
-          <BrandCard img={brand1} />
-          <BrandCard img={brand3} />
-          <BrandCard img={brand1} />
-          <BrandCard img={brand2} />
-          <BrandCard img={brand3} />
-          <BrandCard img={brand2} />
-          <BrandCard img={brand1} />
-          <BrandCard img={brand3} />
-          <BrandCard img={brand1} />
-          <BrandCard img={brand2} />
-          <BrandCard img={brand3} />
-          <BrandCard img={brand2} />
-          <BrandCard img={brand1} />
-          <BrandCard img={brand3} />
-          <BrandCard img={brand2} />
-          <BrandCard img={brand1} />
-          <BrandCard img={brand1} />
-          <BrandCard img={brand2} />
-          <BrandCard img={brand2} />
-          <BrandCard img={brand3} />
+          {loading === false ? (
+            data ? (
+              data.slice(0, 3).map((item, index) => {
+                return <BrandCard key={index} img={item.image} />;
+              })
+            ) : (
+              <h3>لا يوجد ماركات</h3>
+            )
+          ) : (
+            <Spinner animation="border" variant="primary" />
+          )}
         </Row>
       </Container>
     </div>

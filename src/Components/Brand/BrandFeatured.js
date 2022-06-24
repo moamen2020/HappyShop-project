@@ -14,25 +14,21 @@ const BrandFeatured = ({ title, btntitle, pathText }) => {
   return (
     <div className="my-3">
       <Container>
-        {brand.data.length > 0 ? (
-          <div>
-            <SubTitle title={title} btntitle={btntitle} pathText={pathText} />
+        <SubTitle title={title} btntitle={btntitle} pathText={pathText} />
 
-            <Row className="my-1 justify-content-between">
-              {loading === false ? (
-                brand.data ? (
-                  brand.data.slice(0, 3).map((item, index) => {
-                    return <BrandCard key={index} img={item.image} />;
-                  })
-                ) : (
-                  <h3>لا يوجد ماركات</h3>
-                )
-              ) : (
-                <Spinner animation="border" variant="primary" />
-              )}
-            </Row>
-          </div>
-        ) : null}
+        <Row className="my-1 justify-content-between">
+          {loading === false ? (
+            brand.data ? (
+              brand.data.slice(0, 3).map((item, index) => {
+                return <BrandCard key={index} img={item.image} />;
+              })
+            ) : (
+              <h3>لا يوجد ماركات</h3>
+            )
+          ) : (
+            <Spinner animation="border" variant="primary" />
+          )}
+        </Row>
       </Container>
     </div>
   );
