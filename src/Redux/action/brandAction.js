@@ -37,7 +37,7 @@ export const getAllBrandPage = (page) => async (dispatch) => {
 };
 
 // Create new Brand
-export const createBrandPage = (formData) => async (dispatch) => {
+export const createBrand = (formData) => async (dispatch) => {
   try {
     const response = await useInsertDataWithImage(`/api/v1/brands`, formData);
     console.log(response);
