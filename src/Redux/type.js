@@ -6,3 +6,7 @@ export const GET_ERROR = "GET_ERROR";
 // Brand
 export const GET_ALL_BRAND = "GET_ALL_BRAND";
 export const CREATE_BRAND = "CREATE_BRAND";
+
+// Sub category
+
+export const CREATE_SUB_CATEGORY = "CREATE_SUB_BRAND";
