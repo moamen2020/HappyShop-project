@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { Row, Col } from "react-bootstrap";
-import avatar from "../../images/avatar.png";
+// import avatar from "../../images/avatar.png";
 import add from "../../images/add.png";
 import Multiselect from "multiselect-react-dropdown";
+import MultiImageInput from "react-multiple-image-input";
 
 const AdminAddProducts = () => {
   const options = [
     { name: "التصنيف الاول", id: 1 },
     { name: "التصنيف الثاني", id: 2 },
   ];
+
+  const [images, setImages] = useState([]);
+
+  // Values state
+  const [prodName, setProdName] = useState({});
+  const [prodDescription, setProdDescription] = useState({});
+  const [priceBefore, setPriceBefore] = useState({});
+  const [priceAfter, setPriceAfter] = useState({});
+  const [qty, setQty] = useState({});
+  const [catID, setCatID] = useState({});
+  const [brandID, setBrandID] = useState({});
+  const [subCatID, setSubCatID] = useState([]);
+  const [selectedSubID, setSelectedSubID] = useState([]);
+
   const onSelect = (selectedList, selectedItem) => {};
 
   const onRemove = (selectedList, removedItem) => {};
@@ -16,9 +31,15 @@ const AdminAddProducts = () => {
     <div>
       <Row className="justify-content-start ">
         <div className="admin-content-text pb-4"> اضافه منتج جديد</div>
-        <Col sm="8">
+        <Col useStatesm="8">
           <div className="text-form pb-2"> صور للمنتج</div>
-          <img src={avatar} alt="" height="100px" width="120px" />
+          <MultiImageInput
+            images={images}
+            setImages={setImages}
+            theme={"light"}
+            allowCrop={false}
+            max={5}
+          />
           <input
             type="text"
             className="input-form d-block mt-3 px-3"
@@ -39,6 +60,11 @@ const AdminAddProducts = () => {
             type="number"
             className="input-form d-block mt-3 px-3"
             placeholder="سعر المنتج"
+          />
+          <input
+            type="number"
+            className="input-form d-block mt-3 px-3"
+            placeholder="الكمية المتاحة"
           />
           <select
             name="languages"
