@@ -41,27 +41,37 @@ const AdminAddProducts = () => {
             max={5}
           />
           <input
+            value={prodName}
+            onChange={(e) => setProdName(e.target.value)}
             type="text"
             className="input-form d-block mt-3 px-3"
             placeholder="اسم المنتج"
           />
           <textarea
+            value={prodDescription}
+            onChange={(e) => setProdDescription(e.target.value)}
             className="input-form-area p-2 mt-3"
             rows="4"
             cols="50"
             placeholder="وصف المنتج"
           />
           <input
+            value={priceBefore}
+            onChange={(e) => setPriceBefore(e.target.value)}
             type="number"
             className="input-form d-block mt-3 px-3"
             placeholder="السعر قبل الخصم"
           />
           <input
+            value={priceAfter}
+            onChange={(e) => setPriceAfter(e.target.value)}
             type="number"
             className="input-form d-block mt-3 px-3"
-            placeholder="سعر المنتج"
+            placeholder="السعر بعد الخصم"
           />
           <input
+            value={qty}
+            onChange={(e) => setQty(e.target.value)}
             type="number"
             className="input-form d-block mt-3 px-3"
             placeholder="الكمية المتاحة"
