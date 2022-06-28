@@ -10,3 +10,6 @@ export const CREATE_BRAND = "CREATE_BRAND";
 // Sub category
 export const CREATE_SUB_CATEGORY = "CREATE_SUB_CATEGORY";
 export const GET_SUB_CATEGORY = "GET_SUB_CATEGORY";
+
+// Product
+export const CREATE_PRODUCT = "CREATE_PRODUCT";

@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllCategory } from "../../Redux/action/categoryAction";
 import { getSubCategory } from "../../Redux/action/subCategoryAction";
 import { getAllBrand } from "../../Redux/action/brandAction";
+import { createProduct } from "../../Redux/action/productAction";
 import { CompactPicker } from "react-color";
 
 const AdminAddProducts = () => {
@@ -82,6 +83,45 @@ const AdminAddProducts = () => {
   const onSelectBrand = (e) => {
     setBrandID(e.target.value);
   };
+
+  // convert base64 image to file
+  function dataURLtoFile(dataurl, filename) {
+    var arr = dataurl.split(","),
+      mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]),
+      n = bstr.length,
+      u8arr = new Uint8Array(n);
+
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    return new File([u8arr], filename, { type: mime });
+  }
+
+  // Save Data in DB
+  const handelSubmit = async (e) => {
+    e.preventDefault();
+
+    const imgCover = dataURLtoFile(images[0], Math.random() + ".png");
+
+    const formData = new FormData();
+    formData.append("title", prodName);
+    formData.append("description", prodDescription);
+    formData.append("price", priceBefore);
+    formData.append("quantity", qty);
+    formData.append("imageCover", imgCover);
+    formData.append("category", catID);
+
+    // formData.append("images", images);
+    // formData.append("subcategory", subCatID);
+
+    await dispatch(createProduct(formData));
+  };
+
+  // priceAfter;
+  // brandID;
+  // selectedSubID;
 
   return (
     <div>
@@ -205,7 +245,9 @@ const AdminAddProducts = () => {
       </Row>
       <Row>
         <Col sm="8" className="d-flex justify-content-end ">
-          <button className="btn-save d-inline mt-2 ">حفظ التعديلات</button>
+          <button onClick={handelSubmit} className="btn-save d-inline mt-2 ">
+            حفظ التعديلات
+          </button>
         </Col>
       </Row>
     </div>
