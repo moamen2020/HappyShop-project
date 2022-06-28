@@ -8,5 +8,5 @@ export const GET_ALL_BRAND = "GET_ALL_BRAND";
 export const CREATE_BRAND = "CREATE_BRAND";
 
 // Sub category
-
-export const CREATE_SUB_CATEGORY = "CREATE_SUB_BRAND";
+export const CREATE_SUB_CATEGORY = "CREATE_SUB_CATEGORY";
+export const GET_SUB_CATEGORY = "GET_SUB_CATEGORY";

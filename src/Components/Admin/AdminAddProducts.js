@@ -5,7 +5,8 @@ import add from "../../images/add.png";
 import Multiselect from "multiselect-react-dropdown";
 import MultiImageInput from "react-multiple-image-input";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCategory } from "../../Redux/action/categoryAction.js";
+import { getAllCategory } from "../../Redux/action/categoryAction";
+import { getSubCategory } from "../../Redux/action/subCategoryAction";
 import { getAllBrand } from "../../Redux/action/brandAction";
 import { CompactPicker } from "react-color";
 
@@ -23,10 +24,11 @@ const AdminAddProducts = () => {
   //get last brand state from redux
   const brand = useSelector((state) => state.allBrand.brand);
 
-  const options = [
-    { name: "التصنيف الاول", id: 1 },
-    { name: "التصنيف الثاني", id: 2 },
-  ];
+  //get sub Category from redux
+  const subCategory = useSelector((state) => state.subCategory.subCategory);
+  console.log(subCategory);
+
+  const [options, setOptions] = useState([]);
 
   const [images, setImages] = useState([]);
 
@@ -56,13 +58,26 @@ const AdminAddProducts = () => {
     setColors([...newColors]);
   };
 
-  const onSelect = (selectedList, selectedItem) => {};
+  const onSelect = (selectedList, selectedItem) => {
+    setSelectedSubID(selectedList);
+  };
 
-  const onRemove = (selectedList, removedItem) => {};
+  const onRemove = (selectedList, removedItem) => {
+    setSelectedSubID(selectedList);
+  };
 
-  const onSelectCategory = (e) => {
+  const onSelectCategory = async (e) => {
+    if (e.target.value != 0) await dispatch(getSubCategory(e.target.value));
     setCatID(e.target.value);
   };
+
+  useEffect(() => {
+    if (catID !== 0) {
+      if (subCategory.data) {
+        setOptions(subCategory.data);
+      }
+    }
+  }, [catID]);
 
   const onSelectBrand = (e) => {
     setBrandID(e.target.value);
@@ -124,8 +139,12 @@ const AdminAddProducts = () => {
           >
             <option value="val">التصنيف الرئيسي</option>
             {category.data
-              ? category.data.map((item) => {
-                  return <option value={item._id}>{item.name}</option>;
+              ? category.data.map((item, index) => {
+                  return (
+                    <option key={index} value={item._id}>
+                      {item.name}
+                    </option>
+                  );
                 })
               : null}
           </select>
@@ -147,8 +166,12 @@ const AdminAddProducts = () => {
           >
             <option value="val">الماركة</option>
             {brand.data
-              ? brand.data.map((item) => {
-                  return <option value={item._id}>{item.name}</option>;
+              ? brand.data.map((item, index) => {
+                  return (
+                    <option key={index} value={item._id}>
+                      {item.name}
+                    </option>
+                  );
                 })
               : null}
           </select>
