@@ -1,11 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 // import avatar from "../../images/avatar.png";
 import add from "../../images/add.png";
 import Multiselect from "multiselect-react-dropdown";
 import MultiImageInput from "react-multiple-image-input";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllCategory } from "../../Redux/action/categoryAction.js";
+import { getAllBrand } from "../../Redux/action/brandAction";
 
 const AdminAddProducts = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllCategory());
+    dispatch(getAllBrand());
+  }, [dispatch]);
+
+  //get last catgeory state from redux
+  const category = useSelector((state) => state.allCategory.category);
+
+  //get last brand state from redux
+  const brand = useSelector((state) => state.allBrand.brand);
+
+  if (category) console.log(category.data);
+
   const options = [
     { name: "التصنيف الاول", id: 1 },
     { name: "التصنيف الثاني", id: 2 },
@@ -14,11 +32,11 @@ const AdminAddProducts = () => {
   const [images, setImages] = useState([]);
 
   // Values state
-  const [prodName, setProdName] = useState({});
-  const [prodDescription, setProdDescription] = useState({});
-  const [priceBefore, setPriceBefore] = useState({});
-  const [priceAfter, setPriceAfter] = useState({});
-  const [qty, setQty] = useState({});
+  const [prodName, setProdName] = useState("");
+  const [prodDescription, setProdDescription] = useState("");
+  const [priceBefore, setPriceBefore] = useState("");
+  const [priceAfter, setPriceAfter] = useState("");
+  const [qty, setQty] = useState("");
   const [catID, setCatID] = useState({});
   const [brandID, setBrandID] = useState({});
   const [subCatID, setSubCatID] = useState([]);
@@ -27,6 +45,17 @@ const AdminAddProducts = () => {
   const onSelect = (selectedList, selectedItem) => {};
 
   const onRemove = (selectedList, removedItem) => {};
+
+  const onSelectCategory = (e) => {
+    setCatID(e.target.value);
+  };
+
+  const onSelectBrand = (e) => {
+    setBrandID(e.target.value);
+  };
+
+  console.log(catID);
+  console.log(brandID);
   return (
     <div>
       <Row className="justify-content-start ">
@@ -77,15 +106,16 @@ const AdminAddProducts = () => {
             placeholder="الكمية المتاحة"
           />
           <select
-            name="languages"
-            id="lang"
+            name="cat"
+            onChange={onSelectCategory}
             className="select input-form-area mt-3 px-2 "
           >
             <option value="val">التصنيف الرئيسي</option>
-            <option value="val">التصنيف الاول</option>
-            <option value="val2">التصنيف الثاني</option>
-            <option value="val2">التصنيف الثالث</option>
-            <option value="val2">التصنيف الرابع</option>
+            {category.data
+              ? category.data.map((item) => {
+                  return <option value={item._id}>{item.name}</option>;
+                })
+              : null}
           </select>
 
           <Multiselect
@@ -100,12 +130,15 @@ const AdminAddProducts = () => {
           <select
             name="brand"
             id="brand"
+            onChange={onSelectBrand}
             className="select input-form-area mt-3 px-2 "
           >
             <option value="val">الماركة</option>
-            <option value="val2">التصنيف الماركة الاولي</option>
-            <option value="val2">التصنيف الماركة الثانيه</option>
-            <option value="val2">التصنيف الرابع</option>
+            {brand.data
+              ? brand.data.map((item) => {
+                  return <option value={item._id}>{item.name}</option>;
+                })
+              : null}
           </select>
           <div className="text-form mt-3 "> الالوان المتاحه للمنتج</div>
           <div className="mt-1 d-flex">
