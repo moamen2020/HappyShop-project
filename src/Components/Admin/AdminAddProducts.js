@@ -7,6 +7,7 @@ import MultiImageInput from "react-multiple-image-input";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCategory } from "../../Redux/action/categoryAction.js";
 import { getAllBrand } from "../../Redux/action/brandAction";
+import { CompactPicker } from "react-color";
 
 const AdminAddProducts = () => {
   const dispatch = useDispatch();
@@ -14,15 +15,13 @@ const AdminAddProducts = () => {
   useEffect(() => {
     dispatch(getAllCategory());
     dispatch(getAllBrand());
-  }, [dispatch]);
+  }, []);
 
   //get last catgeory state from redux
   const category = useSelector((state) => state.allCategory.category);
 
   //get last brand state from redux
   const brand = useSelector((state) => state.allBrand.brand);
-
-  if (category) console.log(category.data);
 
   const options = [
     { name: "التصنيف الاول", id: 1 },
@@ -42,6 +41,21 @@ const AdminAddProducts = () => {
   const [subCatID, setSubCatID] = useState([]);
   const [selectedSubID, setSelectedSubID] = useState([]);
 
+  // To show hide color picker
+  const [showColor, setShowColor] = useState(false);
+  // Store colors
+  const [colors, setColors] = useState([]);
+
+  const handleChangeColor = (color) => {
+    setColors([...colors, color.hex]);
+    setShowColor(!showColor);
+  };
+
+  const removeColor = (color) => {
+    const newColors = colors.filter((item) => item !== color);
+    setColors([...newColors]);
+  };
+
   const onSelect = (selectedList, selectedItem) => {};
 
   const onRemove = (selectedList, removedItem) => {};
@@ -54,8 +68,6 @@ const AdminAddProducts = () => {
     setBrandID(e.target.value);
   };
 
-  console.log(catID);
-  console.log(brandID);
   return (
     <div>
       <Row className="justify-content-start ">
@@ -142,19 +154,29 @@ const AdminAddProducts = () => {
           </select>
           <div className="text-form mt-3 "> الالوان المتاحه للمنتج</div>
           <div className="mt-1 d-flex">
-            <div
-              className="color ms-2 border  mt-1"
-              style={{ backgroundColor: "#E52C2C" }}
-            ></div>
-            <div
-              className="color ms-2 border mt-1 "
-              style={{ backgroundColor: "white" }}
-            ></div>
-            <div
-              className="color ms-2 border  mt-1"
-              style={{ backgroundColor: "black" }}
-            ></div>
-            <img src={add} alt="" width="30px" height="35px" className="" />
+            {colors.length
+              ? colors.map((color, index) => {
+                  return (
+                    <div
+                      key={index}
+                      onClick={() => removeColor(color)}
+                      className="color ms-2 border  mt-1"
+                      style={{ backgroundColor: color }}
+                    ></div>
+                  );
+                })
+              : null}
+            <img
+              src={add}
+              alt=""
+              width="30px"
+              height="35px"
+              style={{ cursor: "pointer" }}
+              onClick={() => setShowColor(!showColor)}
+            />
+            {showColor ? (
+              <CompactPicker onChangeComplete={handleChangeColor} />
+            ) : null}
           </div>
         </Col>
       </Row>
