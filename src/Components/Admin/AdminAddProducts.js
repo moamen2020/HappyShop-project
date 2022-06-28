@@ -1,128 +1,41 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Row, Col } from "react-bootstrap";
 // import avatar from "../../images/avatar.png";
 import add from "../../images/add.png";
 import Multiselect from "multiselect-react-dropdown";
 import MultiImageInput from "react-multiple-image-input";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllCategory } from "../../Redux/action/categoryAction";
-import { getSubCategory } from "../../Redux/action/subCategoryAction";
-import { getAllBrand } from "../../Redux/action/brandAction";
-import { createProduct } from "../../Redux/action/productAction";
 import { CompactPicker } from "react-color";
+import { ToastContainer } from "react-toastify";
+import AdminAddProductHook from "../../hook/products/add-product-hook";
 
 const AdminAddProducts = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAllCategory());
-    dispatch(getAllBrand());
-  }, []);
-
-  //get last catgeory state from redux
-  const category = useSelector((state) => state.allCategory.category);
-
-  //get last brand state from redux
-  const brand = useSelector((state) => state.allBrand.brand);
-
-  //get sub Category from redux
-  const subCategory = useSelector((state) => state.subCategory.subCategory);
-  console.log(subCategory);
-
-  const [options, setOptions] = useState([]);
-
-  const [images, setImages] = useState([]);
-
-  // Values state
-  const [prodName, setProdName] = useState("");
-  const [prodDescription, setProdDescription] = useState("");
-  const [priceBefore, setPriceBefore] = useState("");
-  const [priceAfter, setPriceAfter] = useState("");
-  const [qty, setQty] = useState("");
-  const [catID, setCatID] = useState({});
-  const [brandID, setBrandID] = useState({});
-  const [subCatID, setSubCatID] = useState([]);
-  const [selectedSubID, setSelectedSubID] = useState([]);
-
-  // To show hide color picker
-  const [showColor, setShowColor] = useState(false);
-  // Store colors
-  const [colors, setColors] = useState([]);
-
-  const handleChangeColor = (color) => {
-    setColors([...colors, color.hex]);
-    setShowColor(!showColor);
-  };
-
-  const removeColor = (color) => {
-    const newColors = colors.filter((item) => item !== color);
-    setColors([...newColors]);
-  };
-
-  const onSelect = (selectedList, selectedItem) => {
-    setSelectedSubID(selectedList);
-  };
-
-  const onRemove = (selectedList, removedItem) => {
-    setSelectedSubID(selectedList);
-  };
-
-  const onSelectCategory = async (e) => {
-    if (e.target.value != 0) await dispatch(getSubCategory(e.target.value));
-    setCatID(e.target.value);
-  };
-
-  useEffect(() => {
-    if (catID !== 0) {
-      if (subCategory.data) {
-        setOptions(subCategory.data);
-      }
-    }
-  }, [catID]);
-
-  const onSelectBrand = (e) => {
-    setBrandID(e.target.value);
-  };
-
-  // convert base64 image to file
-  function dataURLtoFile(dataurl, filename) {
-    var arr = dataurl.split(","),
-      mime = arr[0].match(/:(.*?);/)[1],
-      bstr = atob(arr[1]),
-      n = bstr.length,
-      u8arr = new Uint8Array(n);
-
-    while (n--) {
-      u8arr[n] = bstr.charCodeAt(n);
-    }
-
-    return new File([u8arr], filename, { type: mime });
-  }
-
-  // Save Data in DB
-  const handelSubmit = async (e) => {
-    e.preventDefault();
-
-    const imgCover = dataURLtoFile(images[0], Math.random() + ".png");
-
-    const formData = new FormData();
-    formData.append("title", prodName);
-    formData.append("description", prodDescription);
-    formData.append("price", priceBefore);
-    formData.append("quantity", qty);
-    formData.append("imageCover", imgCover);
-    formData.append("category", catID);
-
-    // formData.append("images", images);
-    // formData.append("subcategory", subCatID);
-
-    await dispatch(createProduct(formData));
-  };
-
-  // priceAfter;
-  // brandID;
-  // selectedSubID;
-
+  const [
+    images,
+    prodName,
+    prodDescription,
+    priceBefore,
+    priceAfter,
+    category,
+    options,
+    brand,
+    colors,
+    showColor,
+    qty,
+    setImages,
+    onSelectCategory,
+    onSelect,
+    onRemove,
+    onSelectBrand,
+    handleChangeColor,
+    handelSubmit,
+    removeColor,
+    onChangeProdName,
+    onChangeDescName,
+    onChangePriceBefore,
+    onChangePriceAfter,
+    onChangeQty,
+    onChangeColor,
+  ] = AdminAddProductHook();
   return (
     <div>
       <Row className="justify-content-start ">
@@ -138,14 +51,14 @@ const AdminAddProducts = () => {
           />
           <input
             value={prodName}
-            onChange={(e) => setProdName(e.target.value)}
+            onChange={onChangeProdName}
             type="text"
             className="input-form d-block mt-3 px-3"
             placeholder="اسم المنتج"
           />
           <textarea
             value={prodDescription}
-            onChange={(e) => setProdDescription(e.target.value)}
+            onChange={onChangeDescName}
             className="input-form-area p-2 mt-3"
             rows="4"
             cols="50"
@@ -153,21 +66,21 @@ const AdminAddProducts = () => {
           />
           <input
             value={priceBefore}
-            onChange={(e) => setPriceBefore(e.target.value)}
+            onChange={onChangePriceBefore}
             type="number"
             className="input-form d-block mt-3 px-3"
             placeholder="السعر قبل الخصم"
           />
           <input
             value={priceAfter}
-            onChange={(e) => setPriceAfter(e.target.value)}
+            onChange={onChangePriceAfter}
             type="number"
             className="input-form d-block mt-3 px-3"
             placeholder="السعر بعد الخصم"
           />
           <input
             value={qty}
-            onChange={(e) => setQty(e.target.value)}
+            onChange={onChangeQty}
             type="number"
             className="input-form d-block mt-3 px-3"
             placeholder="الكمية المتاحة"
@@ -204,7 +117,7 @@ const AdminAddProducts = () => {
             onChange={onSelectBrand}
             className="select input-form-area mt-3 px-2 "
           >
-            <option value="val">الماركة</option>
+            <option value="0">الماركة</option>
             {brand.data
               ? brand.data.map((item, index) => {
                   return (
@@ -235,7 +148,7 @@ const AdminAddProducts = () => {
               width="30px"
               height="35px"
               style={{ cursor: "pointer" }}
-              onClick={() => setShowColor(!showColor)}
+              onClick={onChangeColor}
             />
             {showColor ? (
               <CompactPicker onChangeComplete={handleChangeColor} />
@@ -250,6 +163,7 @@ const AdminAddProducts = () => {
           </button>
         </Col>
       </Row>
+      <ToastContainer />
     </div>
   );
 };
