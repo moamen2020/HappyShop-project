@@ -1,7 +1,8 @@
-import { CREATE_PRODUCT, GET_ERROR } from "../type";
+import { CREATE_PRODUCT, GET_ALL_PRODUCT, GET_ERROR } from "../type";
 
 const initial = {
   products: [],
+  allProducts: [],
   loading: true,
 };
 
@@ -11,6 +12,12 @@ const productsReducer = (state = initial, action) => {
       return {
         ...state,
         products: action.payload,
+        loading: false,
+      };
+    case GET_ALL_PRODUCT:
+      return {
+        ...state,
+        allProducts: action.payload,
         loading: false,
       };
     case GET_ERROR:
