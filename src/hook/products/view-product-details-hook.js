@@ -2,7 +2,10 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getOneBrand } from "../../Redux/action/brandAction";
 import { getOneCategory } from "../../Redux/action/categoryAction";
-import { getOneProduct } from "../../Redux/action/productAction";
+import {
+  getOneProduct,
+  getProductsLike,
+} from "../../Redux/action/productAction";
 
 const ViewProductDetailsHook = (id) => {
   const dispatch = useDispatch();
@@ -14,6 +17,9 @@ const ViewProductDetailsHook = (id) => {
   const oneProducts = useSelector((state) => state.allProducts.oneProduct);
   const oneCategory = useSelector((state) => state.allCategory.oneCategory);
   const oneBrand = useSelector((state) => state.allBrand.oneBrand);
+  const allProductsLike = useSelector(
+    (state) => state.allProducts.likeProducts
+  );
 
   let item = [];
   if (oneProducts.data) {
@@ -31,10 +37,8 @@ const ViewProductDetailsHook = (id) => {
 
   useEffect(() => {
     if (item.category) dispatch(getOneCategory(item.category));
-  }, [item]);
-
-  useEffect(() => {
     if (item.brand) dispatch(getOneBrand(item.brand));
+    if (item.category) dispatch(getProductsLike(item.category));
   }, [item]);
 
   let category = [];
@@ -45,6 +49,8 @@ const ViewProductDetailsHook = (id) => {
   if (oneBrand.data) brand = oneBrand.data;
   else brand = [];
 
+  let productsLike = [];
+  if (allProductsLike.data) productsLike = allProductsLike.data.slice(0, 4);
   console.log("=================================================");
   console.log(category);
   console.log(category);
@@ -52,7 +58,7 @@ const ViewProductDetailsHook = (id) => {
   console.log(category);
   console.log("=================================================");
 
-  return [item, images, category, brand];
+  return [item, images, category, brand, productsLike];
 };
 
 export default ViewProductDetailsHook;

@@ -6,6 +6,7 @@ import {
   GET_ALL_PRODUCT,
   GET_PRODUCT_DETAILS,
   GET_ERROR,
+  GET_PRODUCTS_LIKE,
 } from "../type";
 
 // Create new Product
@@ -48,6 +49,23 @@ export const getOneProduct = (id) => async (dispatch) => {
     const response = await useGetData(`/api/v1/products/${id}`);
     dispatch({
       type: GET_PRODUCT_DETAILS,
+      payload: response,
+      loading: true,
+    });
+  } catch (e) {
+    dispatch({
+      type: GET_ERROR,
+      payload: "Error " + e,
+    });
+  }
+};
+
+// Get one Product with ID
+export const getProductsLike = (id) => async (dispatch) => {
+  try {
+    const response = await useGetData(`/api/v1/products?category=${id}`);
+    dispatch({
+      type: GET_PRODUCTS_LIKE,
       payload: response,
       loading: true,
     });
