@@ -3,16 +3,16 @@ import { Col, Row } from "react-bootstrap";
 import ProductGallery from "./ProductGallery";
 import ProductText from "./ProductText";
 
-const ProductDetails = ({ id }) => {
+const ProductDetails = () => {
   return (
     <div>
       <Row className="py-3">
         <Col lg="4">
-          <ProductGallery id={id} />
+          <ProductGallery />
         </Col>
 
         <Col lg="8">
-          <ProductText id={id} />
+          <ProductText />
         </Col>
       </Row>
     </div>

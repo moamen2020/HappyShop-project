@@ -1,7 +1,15 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import ViewProductDetailsHook from "../../hook/products/view-product-details-hook";
 
-const ProductsText = ({ id }) => {
+const ProductsText = () => {
+  const { id } = useParams();
+
+  const [item] = ViewProductDetailsHook(id);
+
+  console.log(item);
+
   return (
     <div>
       <Row className="mt-2">

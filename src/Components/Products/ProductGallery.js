@@ -6,21 +6,12 @@ import "react-image-gallery/styles/css/image-gallery.css";
 import ImageGallery from "react-image-gallery";
 import LeftButton from "./LeftButton";
 import RightButton from "./RightButton";
-const ProductGallery = ({ id }) => {
-  const images = [
-    {
-      original: `${mobile}`,
-    },
-    {
-      original: `${mobile1}`,
-    },
-    {
-      original: `${mobile2}`,
-    },
-    {
-      original: `${mobile}`,
-    },
-  ];
+import { useParams } from "react-router-dom";
+import ViewProductDetailsHook from "../../hook/products/view-product-details-hook";
+const ProductGallery = () => {
+  const { id } = useParams();
+
+  const [item, images] = ViewProductDetailsHook(id);
 
   return (
     <div
