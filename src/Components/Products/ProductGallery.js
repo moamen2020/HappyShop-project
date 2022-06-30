@@ -6,7 +6,7 @@ import "react-image-gallery/styles/css/image-gallery.css";
 import ImageGallery from "react-image-gallery";
 import LeftButton from "./LeftButton";
 import RightButton from "./RightButton";
-const ProductGallery = () => {
+const ProductGallery = ({ id }) => {
   const images = [
     {
       original: `${mobile}`,

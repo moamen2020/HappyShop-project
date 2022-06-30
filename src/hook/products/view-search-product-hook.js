@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../Redux/action/productAction";
 
-const ViewHomeProductsHook = () => {
+const ViewSearchProductsHook = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -13,10 +13,12 @@ const ViewHomeProductsHook = () => {
 
   let items = [];
   if (allProducts.data) {
-    items = allProducts.data.slice(0, 4);
+    items = allProducts.data;
   } else items = [];
+
+  console.log(items);
 
   return [items];
 };
 
-export default ViewHomeProductsHook;
+export default ViewSearchProductsHook;

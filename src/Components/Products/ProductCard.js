@@ -1,6 +1,5 @@
 import React from "react";
 import { Card, Col } from "react-bootstrap";
-import prod1 from "../../images/item.png";
 import favoff from "../../images/fav-off.png";
 import rate from "../../images/rate.png";
 import { Link } from "react-router-dom";
@@ -8,7 +7,7 @@ const ProductCard = ({ product }) => {
   return (
     <Col xs="6" sm="6" md="4" lg="3" className="d-flex">
       <Link
-        to="/products/:id"
+        to={`/products/${product._id}`}
         style={{
           textDecoration: "none",
         }}

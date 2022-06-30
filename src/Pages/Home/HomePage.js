@@ -9,8 +9,6 @@ import ViewHomeProductsHook from "../../hook/products/view-home-products-hook";
 const HomePage = () => {
   const [items] = ViewHomeProductsHook();
 
-  console.log(items);
-
   return (
     <div className="font" style={{ minHeight: "670px" }}>
       <Slider />
