@@ -1,7 +1,5 @@
 import React from "react";
 import mobile from "../../images/mobile.png";
-import mobile1 from "../../images/mobile1.png";
-import mobile2 from "../../images/mobile2.png";
 import "react-image-gallery/styles/css/image-gallery.css";
 import ImageGallery from "react-image-gallery";
 import LeftButton from "./LeftButton";
@@ -11,7 +9,7 @@ import ViewProductDetailsHook from "../../hook/products/view-product-details-hoo
 const ProductGallery = () => {
   const { id } = useParams();
 
-  const [item, images] = ViewProductDetailsHook(id);
+  const [item, images, category] = ViewProductDetailsHook(id);
 
   return (
     <div

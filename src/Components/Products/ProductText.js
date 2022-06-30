@@ -6,27 +6,32 @@ import ViewProductDetailsHook from "../../hook/products/view-product-details-hoo
 const ProductsText = () => {
   const { id } = useParams();
 
-  const [item] = ViewProductDetailsHook(id);
+  const [item, images, category, brand] = ViewProductDetailsHook(id);
 
-  console.log(item);
+  console.log("=================+++++++++++++++===================");
+  console.log(category);
+  console.log(category);
+  console.log(category);
+  console.log(category);
+  console.log("=================+++++++++++++++===================");
 
   return (
     <div>
       <Row className="mt-2">
-        <div className="cat-text">الالكترونيات :</div>
+        <div className="cat-text">{category ? category.name : null} :</div>
       </Row>
       <Row>
         <Col md="8">
           <div className="cat-title d-inline">
-            آيفون XR بذاكرة سعة 128 جيجابايت ويدعم تقنية 4G LTE مع تطبيق فيس
-            تايم (برودكت) أحمر <div className="cat-rate d-inline mx-3">4.5</div>
+            {item.title}
+            <div className="cat-rate d-inline mx-3">{item.ratingsQuantity}</div>
           </div>
         </Col>
       </Row>
       <Row>
         <Col md="8" className="mt-4">
           <div className="cat-text d-inline">الماركة :</div>
-          <div className="barnd-text d-inline mx-1">سامسنوج </div>
+          <div className="barnd-text d-inline mx-1">{brand.name} </div>
         </Col>
       </Row>
       <Row>

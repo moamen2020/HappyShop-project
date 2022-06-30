@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getOneBrand } from "../../Redux/action/brandAction";
+import { getOneCategory } from "../../Redux/action/categoryAction";
 import { getOneProduct } from "../../Redux/action/productAction";
 
 const ViewProductDetailsHook = (id) => {
@@ -10,6 +12,8 @@ const ViewProductDetailsHook = (id) => {
   }, [dispatch, id]);
 
   const oneProducts = useSelector((state) => state.allProducts.oneProduct);
+  const oneCategory = useSelector((state) => state.allCategory.oneCategory);
+  const oneBrand = useSelector((state) => state.allBrand.oneBrand);
 
   let item = [];
   if (oneProducts.data) {
@@ -17,7 +21,6 @@ const ViewProductDetailsHook = (id) => {
   } else item = [];
 
   let images = [];
-
   if (item.images) {
     images = item.images.map((img) => {
       return { original: img };
@@ -26,7 +29,30 @@ const ViewProductDetailsHook = (id) => {
     images = [{}];
   }
 
-  return [item, images];
+  useEffect(() => {
+    if (item.category) dispatch(getOneCategory(item.category));
+  }, [item]);
+
+  useEffect(() => {
+    if (item.brand) dispatch(getOneBrand(item.brand));
+  }, [item]);
+
+  let category = [];
+  if (oneCategory.data) category = oneCategory.data;
+  else category = [];
+
+  let brand = [];
+  if (oneBrand.data) brand = oneBrand.data;
+  else brand = [];
+
+  console.log("=================================================");
+  console.log(category);
+  console.log(category);
+  console.log(category);
+  console.log(category);
+  console.log("=================================================");
+
+  return [item, images, category, brand];
 };
 
 export default ViewProductDetailsHook;
