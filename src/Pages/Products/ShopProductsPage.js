@@ -8,7 +8,7 @@ import PaginationCompontent from "../../Components/Utility/Pagination";
 import ViewSearchProductsHook from "../../hook/products/view-search-product-hook";
 
 const ShopProductsPage = () => {
-  const [items] = ViewSearchProductsHook();
+  const [items, pagination, onPress] = ViewSearchProductsHook();
 
   return (
     <div style={{ minHeight: "670px" }}>
@@ -24,7 +24,7 @@ const ShopProductsPage = () => {
             <CardProductsContainer products={items} />
           </Col>
         </Row>
-        <PaginationCompontent />
+        <PaginationCompontent pageCount={pagination} onPress={onPress} />
       </Container>
     </div>
   );

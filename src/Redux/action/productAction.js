@@ -45,6 +45,25 @@ export const getAllProducts = (limit) => async (dispatch) => {
   }
 };
 
+// Get all Product with page number
+export const getAllProductsPage = (page, limit) => async (dispatch) => {
+  try {
+    const response = await useGetData(
+      `/api/v1/products?page=${page}&limit=${limit}`
+    );
+    dispatch({
+      type: GET_ALL_PRODUCT,
+      payload: response,
+      loading: true,
+    });
+  } catch (e) {
+    dispatch({
+      type: GET_ERROR,
+      payload: "Error " + e,
+    });
+  }
+};
+
 // Get one Product with ID
 export const getOneProduct = (id) => async (dispatch) => {
   try {

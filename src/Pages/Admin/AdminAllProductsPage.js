@@ -6,7 +6,10 @@ import PaginationComponent from "../../Components/Utility/Pagination";
 import ViewProductAdminHook from "../../hook/admin/view-product-admin-hook";
 
 const AdminAllProductsPage = () => {
-  const [items, pagination] = ViewProductAdminHook();
+  const [items, pagination, onPress] = ViewProductAdminHook();
+
+  if (pagination) var pageCount = pagination;
+  else pageCount = 0;
 
   return (
     <Container>
@@ -16,7 +19,9 @@ const AdminAllProductsPage = () => {
         </Col>
         <Col sm="9" xs="10" md="10">
           <AdminAllProducts products={items} />
-          <PaginationComponent />
+          {pageCount > 1 ? (
+            <PaginationComponent pageCount={pageCount} onPress={onPress} />
+          ) : null}
         </Col>
       </Row>
     </Container>

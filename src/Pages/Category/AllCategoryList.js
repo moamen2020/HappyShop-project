@@ -1,6 +1,6 @@
 import React from "react";
 import CategoryContainer from "../../Components/Category/CategoryContainer";
-import PaginationCompontent from "../../Components/Utility/Pagination";
+import PaginationComponent from "../../Components/Utility/Pagination";
 import AllCategoryHook from "../../hook/category/all-category-page-hook";
 
 const AllCategoryList = () => {
@@ -10,7 +10,7 @@ const AllCategoryList = () => {
     <div style={{ minHeight: "670px" }}>
       <CategoryContainer data={category.data} loading={loading} />
       {pageCount > 1 ? (
-        <PaginationCompontent
+        <PaginationComponent
           pageCount={category.paginationResult.numberOfPages}
           onPress={getPage}
         />
