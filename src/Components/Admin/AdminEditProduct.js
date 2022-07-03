@@ -6,9 +6,12 @@ import Multiselect from "multiselect-react-dropdown";
 import MultiImageInput from "react-multiple-image-input";
 import { CompactPicker } from "react-color";
 import { ToastContainer } from "react-toastify";
-import AdminAddProductHook from "../../hook/products/add-product-hook";
+import AdminEditProductHook from "../../hook/products/edit-product-admin-hook";
+import { useParams } from "react-router-dom";
 
 const AdminEditProduct = () => {
+  const { id } = useParams();
+
   const [
     images,
     prodName,
@@ -21,13 +24,15 @@ const AdminEditProduct = () => {
     colors,
     showColor,
     qty,
+    catID,
+    brandID,
     setImages,
     onSelectCategory,
     onSelect,
     onRemove,
     onSelectBrand,
     handleChangeColor,
-    handelSubmit,
+    handleSubmit,
     removeColor,
     onChangeProdName,
     onChangeDescName,
@@ -35,7 +40,7 @@ const AdminEditProduct = () => {
     onChangePriceAfter,
     onChangeQty,
     onChangeColor,
-  ] = AdminAddProductHook();
+  ] = AdminEditProductHook(id);
   return (
     <div>
       <Row className="justify-content-start ">
@@ -89,6 +94,7 @@ const AdminEditProduct = () => {
             placeholder="الكمية المتاحة"
           />
           <select
+            value={catID}
             name="cat"
             onChange={onSelectCategory}
             className="select input-form-area mt-3 px-2 "
@@ -115,6 +121,7 @@ const AdminEditProduct = () => {
             style={{ color: "red" }}
           />
           <select
+            value={brandID}
             name="brand"
             id="brand"
             onChange={onSelectBrand}
@@ -161,7 +168,7 @@ const AdminEditProduct = () => {
       </Row>
       <Row>
         <Col sm="8" className="d-flex justify-content-end ">
-          <button onClick={handelSubmit} className="btn-save d-inline mt-2 ">
+          <button onClick={handleSubmit} className="btn-save d-inline mt-2 ">
             حفظ التعديلات
           </button>
         </Col>

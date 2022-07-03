@@ -4,15 +4,25 @@ import { getAllCategory } from "../../Redux/action/categoryAction";
 import { getSubCategory } from "../../Redux/action/subCategoryAction";
 import { getAllBrand } from "../../Redux/action/brandAction";
 import { createProduct } from "../../Redux/action/productAction";
-import notify from "../../hook/useNotifaction";
+import { getOneProduct } from "../../Redux/action/productAction";
 
-const AdminAddProductHook = () => {
+import notify from "../useNotifaction";
+
+const AdminEditProductHook = (id) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllCategory());
-    dispatch(getAllBrand());
+    const run = async () => {
+      await dispatch(getOneProduct(id));
+      await dispatch(getAllCategory());
+      await dispatch(getAllBrand());
+    };
+
+    run();
   }, []);
+
+  // Get on Product details
+  const item = useSelector((state) => state.allProducts.oneProduct);
 
   //get last catgeory state from redux
   const category = useSelector((state) => state.allCategory.category);
@@ -22,7 +32,6 @@ const AdminAddProductHook = () => {
 
   //get sub Category from redux
   const subCategory = useSelector((state) => state.subCategory.subCategory);
-  console.log(subCategory);
 
   const [options, setOptions] = useState([]);
 
@@ -38,6 +47,18 @@ const AdminAddProductHook = () => {
   const [brandID, setBrandID] = useState({});
   const [selectedSubID, setSelectedSubID] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (item.data) {
+      setProdName(item.data.title);
+      setProdDescription(item.data.description);
+      setPriceBefore(item.data.price);
+      setQty(item.data.quantity);
+      setCatID(item.data.category);
+      setBrandID(item.data.brand);
+      setColors(item.data.availableColors);
+    }
+  }, [item]);
 
   const onChangeProdName = (event) => {
     event.persist();
@@ -125,45 +146,7 @@ const AdminAddProductHook = () => {
   }
 
   // Save Data in DB
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (
-      catID <= 0 ||
-      prodName === "" ||
-      prodDescription === "" ||
-      qty <= 0 ||
-      images.length <= 0 ||
-      priceBefore <= 0
-    ) {
-      notify("من فضلك اكمل البيانات", "warn");
-      return;
-    }
-
-    const imgCover = dataURLtoFile(images[0], Math.random() + ".png");
-
-    const itemImages = Array.from(Array(Object.keys(images).length).keys()).map(
-      (item, index) => {
-        return dataURLtoFile(images[index], Math.random() + ".png");
-      }
-    );
-
-    const formData = new FormData();
-    formData.append("title", prodName);
-    formData.append("description", prodDescription);
-    formData.append("quantity", qty);
-    formData.append("price", priceBefore);
-    formData.append("imageCover", imgCover);
-    formData.append("category", catID);
-    formData.append("brand", brandID);
-
-    colors.map((color) => formData.append("availableColors", color));
-    selectedSubID.map((item) => formData.append("subcategory", item._id));
-    itemImages.map((item) => formData.append("images", item));
-
-    setLoading(true);
-    await dispatch(createProduct(formData));
-    setLoading(false);
-  };
+  const handleSubmit = async (e) => {};
 
   // priceAfter;
   // brandID;
@@ -208,6 +191,8 @@ const AdminAddProductHook = () => {
     colors,
     showColor,
     qty,
+    catID,
+    brandID,
     setImages,
     onSelectCategory,
     onSelect,
@@ -225,4 +210,4 @@ const AdminAddProductHook = () => {
   ];
 };
 
-export default AdminAddProductHook;
+export default AdminEditProductHook;
