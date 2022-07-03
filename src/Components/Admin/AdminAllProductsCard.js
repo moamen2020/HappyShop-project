@@ -53,7 +53,12 @@ const AdminAllProducsCard = ({ item }) => {
             <div className="d-inline item-delete-edit" onClick={handleShow}>
               ازاله
             </div>
-            <div className="d-inline item-delete-edit">تعديل</div>
+            <Link
+              to={`/admin/editproduct/${item._id}`}
+              style={{ textDecoration: "none" }}
+            >
+              <div className="d-inline item-delete-edit">تعديل</div>
+            </Link>
           </Col>
         </Row>
         <Link to={`/products/${item._id}`} style={{ textDecoration: "none" }}>
