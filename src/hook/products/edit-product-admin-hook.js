@@ -4,6 +4,7 @@ import { getAllCategory } from "../../Redux/action/categoryAction";
 import { getSubCategory } from "../../Redux/action/subCategoryAction";
 import { getAllBrand } from "../../Redux/action/brandAction";
 import { getOneProduct } from "../../Redux/action/productAction";
+import { updateProduct } from "../../Redux/action/productAction";
 
 import notify from "../useNotifaction";
 
@@ -152,8 +153,75 @@ const AdminEditProductHook = (id) => {
     return new File([u8arr], filename, { type: mime });
   }
 
+  //convert url to file
+  const convertURLtoFile = async (url) => {
+    const response = await fetch(url, { mode: "cors" });
+    const data = await response.blob();
+    const ext = url.split(".").pop();
+    const filename = url.split("/").pop();
+    const metadata = { type: `image/${ext}` };
+    return new File([data], Math.random(), metadata);
+  };
+
   // Save Data in DB
-  const handleSubmit = async (e) => {};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (
+      catID <= 0 ||
+      prodName === "" ||
+      prodDescription === "" ||
+      qty <= 0 ||
+      images.length <= 0 ||
+      priceBefore <= 0
+    ) {
+      notify("من فضلك اكمل البيانات", "warn");
+      return;
+    }
+
+    let imgCover;
+    if (images[0].length <= 1000) {
+      convertURLtoFile(images[0]).then((val) => (imgCover = val));
+    } else {
+      imgCover = dataURLtoFile(images[0], Math.random() + ".png");
+    }
+
+    let itemImages = [];
+    //convert array of base 64 image to file
+    Array.from(Array(Object.keys(images).length).keys()).map((item, index) => {
+      if (images[index].length <= 1000) {
+        convertURLtoFile(images[index]).then((val) => itemImages.push(val));
+      } else {
+        itemImages.push(dataURLtoFile(images[index], Math.random() + ".png"));
+      }
+    });
+
+    const formData = new FormData();
+    formData.append("title", prodName);
+    formData.append("description", prodDescription);
+    formData.append("quantity", qty);
+    formData.append("price", priceBefore);
+    formData.append("category", catID);
+    formData.append("brand", brandID);
+
+    setTimeout(() => {
+      formData.append("imageCover", imgCover);
+      itemImages.map((item) => formData.append("images", item));
+    }, 1000);
+
+    setTimeout(() => {
+      console.log(imgCover);
+      console.log(itemImages);
+    }, 1000);
+
+    colors.map((color) => formData.append("availableColors", color));
+    selectedSubID.map((item) => formData.append("subcategory", item._id));
+
+    setTimeout(async () => {
+      setLoading(true);
+      await dispatch(updateProduct(id, formData));
+      setLoading(false);
+    }, 1000);
+  };
 
   // priceAfter;
   // brandID;
@@ -180,7 +248,7 @@ const AdminEditProductHook = (id) => {
 
       if (products) {
         if (products.status === 201) {
-          notify("تمت الاضافة بنجاح", "success");
+          notify("تم التعديل بنجاح", "success");
         }
       }
     }

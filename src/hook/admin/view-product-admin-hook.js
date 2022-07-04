@@ -19,15 +19,19 @@ const ViewProductAdminHook = () => {
   const allProducts = useSelector((state) => state.allProducts.allProducts);
 
   let items = [];
-  if (allProducts.data) {
-    items = allProducts.data;
-  } else items = [];
-
   let pagination = [];
-  if (allProducts.paginationResult) {
-    pagination = allProducts.paginationResult.numberOfPages;
-  } else pagination = [];
 
+  try {
+    if (allProducts.data) {
+      items = allProducts.data;
+    } else items = [];
+
+    if (allProducts.paginationResult) {
+      pagination = allProducts.paginationResult.numberOfPages;
+    } else pagination = [];
+  } catch (error) {
+    console.log(error);
+  }
   return [items, pagination, onPress];
 };
 
