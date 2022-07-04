@@ -20,6 +20,7 @@ const categoryReducer = (state = initial, action) => {
       };
     case GET_ONE_CATEGORY:
       return {
+        ...state,
         oneCategory: action.payload,
         loading: false,
       };
@@ -30,6 +31,7 @@ const categoryReducer = (state = initial, action) => {
       };
     case GET_ERROR:
       return {
+        ...state,
         loading: true,
         category: action.payload,
       };

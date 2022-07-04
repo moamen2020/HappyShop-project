@@ -41,6 +41,8 @@ const AdminEditProduct = () => {
     onChangeQty,
     onChangeColor,
   ] = AdminEditProductHook(id);
+
+  console.log(category);
   return (
     <div>
       <Row className="justify-content-start ">

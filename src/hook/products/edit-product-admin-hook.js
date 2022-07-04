@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllCategory } from "../../Redux/action/categoryAction";
 import { getSubCategory } from "../../Redux/action/subCategoryAction";
 import { getAllBrand } from "../../Redux/action/brandAction";
-import { createProduct } from "../../Redux/action/productAction";
 import { getOneProduct } from "../../Redux/action/productAction";
 
 import notify from "../useNotifaction";
@@ -23,6 +22,7 @@ const AdminEditProductHook = (id) => {
 
   // Get on Product details
   const item = useSelector((state) => state.allProducts.oneProduct);
+  console.log(item);
 
   //get last catgeory state from redux
   const category = useSelector((state) => state.allCategory.category);
@@ -31,7 +31,7 @@ const AdminEditProductHook = (id) => {
   const brand = useSelector((state) => state.allBrand.brand);
 
   //get sub Category from redux
-  const subCategory = useSelector((state) => state.subCategory.subCategory);
+  const subCat = useSelector((state) => state.subCategory.subCategory);
 
   const [options, setOptions] = useState([]);
 
@@ -40,16 +40,17 @@ const AdminEditProductHook = (id) => {
   // Values state
   const [prodName, setProdName] = useState("");
   const [prodDescription, setProdDescription] = useState("");
-  const [priceBefore, setPriceBefore] = useState("");
-  const [priceAfter, setPriceAfter] = useState("");
-  const [qty, setQty] = useState("");
-  const [catID, setCatID] = useState({});
-  const [brandID, setBrandID] = useState({});
+  const [priceBefore, setPriceBefore] = useState("السعر قبل الخصم");
+  const [priceAfter, setPriceAfter] = useState("السعر بعد الخصم");
+  const [qty, setQty] = useState("الكمية المتاحة");
+  const [catID, setCatID] = useState("0");
+  const [brandID, setBrandID] = useState("0");
   const [selectedSubID, setSelectedSubID] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (item.data) {
+      setImages(item.data.images);
       setProdName(item.data.title);
       setProdDescription(item.data.description);
       setPriceBefore(item.data.price);
@@ -114,17 +115,23 @@ const AdminEditProductHook = (id) => {
   };
 
   const onSelectCategory = async (e) => {
-    if (e.target.value !== 0) await dispatch(getSubCategory(e.target.value));
     setCatID(e.target.value);
   };
 
   useEffect(() => {
-    if (catID !== 0) {
-      if (subCategory.data) {
-        setOptions(subCategory.data);
-      }
+    if (catID != 0) {
+      const run = async () => {
+        await dispatch(getSubCategory(catID));
+      };
+      run();
     }
-  }, [catID, subCategory.data]);
+  }, [catID]);
+
+  useEffect(() => {
+    if (subCat) {
+      setOptions(subCat.data);
+    }
+  }, [subCat]);
 
   const onSelectBrand = (e) => {
     setBrandID(e.target.value);
