@@ -11,6 +11,12 @@ const ShopProductsPage = () => {
   const [items, pagination, onPress, getProduct, results] =
     ViewSearchProductsHook();
 
+  if (pagination) {
+    var pageCount = pagination;
+  } else {
+    pageCount = 0;
+  }
+
   return (
     <div style={{ minHeight: "670px" }}>
       <CategorysHeader />
