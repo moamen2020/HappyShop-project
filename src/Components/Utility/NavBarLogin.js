@@ -19,7 +19,7 @@ const NavBarLogin = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <FormControl
-            value={searchWord}
+            value={localStorage.getItem("SearchWord")}
             onChange={onChangeSearch}
             type="search"
             placeholder="ابحث..."

@@ -32,20 +32,30 @@ const ViewSearchProductsHook = () => {
   const allProducts = useSelector((state) => state.allProducts.allProducts);
 
   let items = [];
+  let pagination = [];
+  let results = [];
+
   try {
     if (allProducts.data) {
       items = allProducts.data;
     } else items = [];
   } catch (error) {}
 
-  let pagination = [];
+  try {
+    if (allProducts.results) {
+      results = allProducts.results;
+    } else results = 0;
+  } catch (error) {}
+
   try {
     if (allProducts.paginationResult) {
       pagination = allProducts.paginationResult.numberOfPages;
     } else pagination = [];
   } catch (error) {}
 
-  return [items, pagination, onPress, getProduct];
+  console.log(allProducts);
+
+  return [items, pagination, onPress, getProduct, results];
 };
 
 export default ViewSearchProductsHook;
