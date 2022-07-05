@@ -3,7 +3,7 @@ import { Row } from "react-bootstrap";
 import SidebarSearchHook from "../../hook/search/sidebar-search-hook";
 
 const SideFilter = () => {
-  const [category, brand] = SidebarSearchHook();
+  const [category, brand, clickCategory, clickBrand] = SidebarSearchHook();
 
   return (
     <div className="mt-3">
@@ -18,7 +18,11 @@ const SideFilter = () => {
             category.map((item, index) => {
               return (
                 <div className="d-flex mt-3" key={index}>
-                  <input type="checkbox" value={item._id} />
+                  <input
+                    onChange={clickCategory}
+                    type="checkbox"
+                    value={item._id}
+                  />
                   <div className="filter-sub me-2 ">{item.name}</div>
                 </div>
               );
@@ -38,7 +42,11 @@ const SideFilter = () => {
             brand.map((item, index) => {
               return (
                 <div className="d-flex mt-3" key={index}>
-                  <input type="checkbox" value={item._id} />
+                  <input
+                    onChange={clickBrand}
+                    type="checkbox"
+                    value={item._id}
+                  />
                   <div className="filter-sub me-2 ">{item.name}</div>
                 </div>
               );
