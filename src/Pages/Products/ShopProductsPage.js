@@ -21,7 +21,10 @@ const ShopProductsPage = () => {
     <div style={{ minHeight: "670px" }}>
       <CategorysHeader />
       <Container>
-        <SearchCountResult title={`هناك ${results} نتيجة بحث`} />
+        <SearchCountResult
+          onClick={getProduct}
+          title={`هناك ${results} نتيجة بحث`}
+        />
         <Row className="d-flex flex-row">
           <Col sm="2" xs="2" md="1" className="d-flex">
             <SideFilter />

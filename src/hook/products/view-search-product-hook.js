@@ -16,7 +16,10 @@ const ViewSearchProductsHook = () => {
     if (localStorage.getItem("SearchWord") != null) {
       word = localStorage.getItem("SearchWord");
     }
-    await dispatch(getAllProductsSearch(`limit=${limit}&keyword=${word}`));
+    sortData();
+    await dispatch(
+      getAllProductsSearch(`sort=${sort}&limit=${limit}&keyword=${word}`)
+    );
   };
 
   useEffect(() => {
@@ -29,8 +32,11 @@ const ViewSearchProductsHook = () => {
     if (localStorage.getItem("SearchWord") != null) {
       word = localStorage.getItem("SearchWord");
     }
+    sortData();
     await dispatch(
-      getAllProductsSearch(`limit=${limit}&page=${page}&keyword=${word}`)
+      getAllProductsSearch(
+        `sort=${sort}&limit=${limit}&page=${page}&keyword=${word}`
+      )
     );
   };
 
@@ -57,6 +63,32 @@ const ViewSearchProductsHook = () => {
       pagination = allProducts.paginationResult.numberOfPages;
     } else pagination = [];
   } catch (error) {}
+
+  let sortType = "";
+  let sort;
+  const sortData = () => {
+    if (localStorage.getItem("SortType")) {
+      sortType = localStorage.getItem("SortType");
+    } else {
+      sortType = "";
+    }
+
+    if (sortType === "السعر من الاقل للاعلي") {
+      sort = "+price";
+    }
+
+    if (sortType === "السعر من الاعلي للاقل") {
+      sort = "-price";
+    }
+
+    if (sortType === "الاعلي تقييما") {
+      sort = "-ratingsQuantity";
+    }
+
+    if (sortType === "الاكثر مبيعا") {
+      sort = "-sold";
+    }
+  };
 
   return [items, pagination, onPress, getProduct, results];
 };
