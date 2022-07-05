@@ -4,8 +4,10 @@ import logo from "../../images/logo.png";
 import login from "../../images/login.png";
 import cart from "../../images/cart.png";
 import { Link } from "react-router-dom";
+import NavbarSearchHook from "../../hook/search/navbar-search-hook";
 
 const NavBarLogin = () => {
+  const [onChangeSearch, searchWord] = NavbarSearchHook();
   return (
     <Navbar className="sticky-top" bg="dark" variant="dark" expand="sm">
       <Container>
@@ -17,6 +19,8 @@ const NavBarLogin = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <FormControl
+            value={searchWord}
+            onChange={onChangeSearch}
             type="search"
             placeholder="ابحث..."
             className="me-2 w-100 text-center"
@@ -25,7 +29,8 @@ const NavBarLogin = () => {
           <Nav className="me-auto">
             <Nav.Link
               href="/login"
-              className="nav-text d-flex mt-3 justify-content-center">
+              className="nav-text d-flex mt-3 justify-content-center"
+            >
               <img src={login} className="login-img" alt="sfvs" />
 
               <p style={{ color: "white" }}>دخول</p>
@@ -33,7 +38,8 @@ const NavBarLogin = () => {
             <Nav.Link
               href="/cart"
               className="nav-text d-flex mt-3 justify-content-center"
-              style={{ color: "white" }}>
+              style={{ color: "white" }}
+            >
               <img src={cart} className="login-img" alt="sfvs" />
               <p style={{ color: "white" }}>العربه</p>
             </Nav.Link>
