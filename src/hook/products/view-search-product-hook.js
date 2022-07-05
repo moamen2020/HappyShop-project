@@ -11,12 +11,11 @@ const ViewSearchProductsHook = () => {
 
   let limit = 6;
 
-  let word = "";
-  if (localStorage.getItem("SearchWord") != null) {
-    word = localStorage.getItem("SearchWord");
-  }
-
   const getProduct = async () => {
+    let word = "";
+    if (localStorage.getItem("SearchWord") != null) {
+      word = localStorage.getItem("SearchWord");
+    }
     await dispatch(getAllProductsSearch(`limit=${limit}&keyword=${word}`));
   };
 
@@ -26,7 +25,13 @@ const ViewSearchProductsHook = () => {
   }, [dispatch]);
 
   const onPress = async (page) => {
-    await dispatch(getAllProductsPage(page, limit));
+    let word = "";
+    if (localStorage.getItem("SearchWord") != null) {
+      word = localStorage.getItem("SearchWord");
+    }
+    await dispatch(
+      getAllProductsSearch(`limit=${limit}&page=${page}&keyword=${word}`)
+    );
   };
 
   const allProducts = useSelector((state) => state.allProducts.allProducts);
@@ -52,8 +57,6 @@ const ViewSearchProductsHook = () => {
       pagination = allProducts.paginationResult.numberOfPages;
     } else pagination = [];
   } catch (error) {}
-
-  console.log(allProducts);
 
   return [items, pagination, onPress, getProduct, results];
 };
