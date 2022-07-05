@@ -9,12 +9,20 @@ import {
 const ViewSearchProductsHook = () => {
   const dispatch = useDispatch();
 
-  // getAllProductsSearch(`limit=${limit}`)
-
   let limit = 6;
 
+  let word = "";
+  if (localStorage.getItem("SearchWord") != null) {
+    word = localStorage.getItem("SearchWord");
+  }
+
+  const getProduct = async () => {
+    await dispatch(getAllProductsSearch(`limit=${limit}&keyword=${word}`));
+  };
+
   useEffect(() => {
-    dispatch(getAllProducts(limit));
+    // dispatch(getAllProductsSearch(`limit=${limit}&keyword=${word}`));
+    getProduct();
   }, [dispatch]);
 
   const onPress = async (page) => {
@@ -37,7 +45,7 @@ const ViewSearchProductsHook = () => {
     } else pagination = [];
   } catch (error) {}
 
-  return [items, pagination, onPress];
+  return [items, pagination, onPress, getProduct];
 };
 
 export default ViewSearchProductsHook;
