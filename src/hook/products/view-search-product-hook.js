@@ -13,12 +13,18 @@ const ViewSearchProductsHook = () => {
 
   const getProduct = async () => {
     let word = "";
+    let queryCategory = "";
     if (localStorage.getItem("SearchWord") != null) {
       word = localStorage.getItem("SearchWord");
     }
+    if (localStorage.getItem("CategoryChecked") != null) {
+      queryCategory = localStorage.getItem("CategoryChecked");
+    }
     sortData();
     await dispatch(
-      getAllProductsSearch(`sort=${sort}&limit=${limit}&keyword=${word}`)
+      getAllProductsSearch(
+        `sort=${sort}&limit=${limit}&keyword=${word}&${queryCategory}`
+      )
     );
   };
 
@@ -29,13 +35,18 @@ const ViewSearchProductsHook = () => {
 
   const onPress = async (page) => {
     let word = "";
+    let queryCategory = "";
     if (localStorage.getItem("SearchWord") != null) {
       word = localStorage.getItem("SearchWord");
+    }
+
+    if (localStorage.getItem("CategoryChecked") != null) {
+      queryCategory = localStorage.getItem("CategoryChecked");
     }
     sortData();
     await dispatch(
       getAllProductsSearch(
-        `sort=${sort}&limit=${limit}&page=${page}&keyword=${word}`
+        `sort=${sort}&limit=${limit}&page=${page}&keyword=${word}&${queryCategory}`
       )
     );
   };
