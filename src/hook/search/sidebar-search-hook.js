@@ -11,7 +11,10 @@ const SidebarSearchHook = () => {
 
   const [categoryChecked, setCategoryChecked] = useState([]);
   const [brandChecked, setBrandChecked] = useState([]);
+  const [priFrom, setPriFrom] = useState([]);
+  const [priTo, setPriTo] = useState([]);
   let queryCategory = "";
+  let queryBrand = "";
   const dispatch = useDispatch();
 
   const get = async () => {
@@ -41,21 +44,18 @@ const SidebarSearchHook = () => {
     let value = e.target.value;
 
     if (value === "0") {
-      getQuery();
       setCategoryChecked([]);
     } else {
       if (e.target.checked === true) {
-        // getQuery();
         setCategoryChecked([...categoryChecked, value]);
       } else if (e.target.checked === false) {
         const newArray = categoryChecked.filter((e) => e !== value);
-        // getQuery();
         setCategoryChecked(newArray);
       }
     }
   };
 
-  const getQuery = () => {
+  useEffect(() => {
     queryCategory = categoryChecked
       .map((val) => "category[in][]=" + val)
       .join("&");
@@ -63,7 +63,7 @@ const SidebarSearchHook = () => {
     setInterval(() => {
       getProduct();
     }, 1000);
-  };
+  }, [categoryChecked]);
 
   const clickBrand = (e) => {
     let value = e.target.value;
@@ -80,7 +80,30 @@ const SidebarSearchHook = () => {
     }
   };
 
-  return [category, brand, clickCategory, clickBrand];
+  useEffect(() => {
+    queryBrand = brandChecked.map((val) => "brand[in][]=" + val).join("&");
+    localStorage.setItem("BrandChecked", queryBrand);
+    setInterval(() => {
+      getProduct();
+    }, 1000);
+  }, [brandChecked]);
+
+  const priceFrom = (e) => {
+    localStorage.setItem("PriceForm", e.target.value);
+    setPriFrom(e.target.value);
+  };
+  const priceTo = (e) => {
+    localStorage.setItem("PriceTo", e.target.value);
+    setPriTo(e.target.value);
+  };
+
+  useEffect(() => {
+    setInterval(() => {
+      getProduct();
+    }, 1000);
+  }, [priFrom, priTo]);
+
+  return [category, brand, clickCategory, clickBrand, priceFrom, priceTo];
 };
 
 export default SidebarSearchHook;

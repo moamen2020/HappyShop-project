@@ -3,7 +3,11 @@ import { Row } from "react-bootstrap";
 import SidebarSearchHook from "../../hook/search/sidebar-search-hook";
 
 const SideFilter = () => {
-  const [category, brand, clickCategory, clickBrand] = SidebarSearchHook();
+  const [category, brand, clickCategory, clickBrand, priceFrom, priceTo] =
+    SidebarSearchHook();
+
+  let localFrom = localStorage.getItem("PriceForm");
+  let localTo = localStorage.getItem("PriceTo");
 
   return (
     <div className="mt-3">
@@ -60,6 +64,8 @@ const SideFilter = () => {
         <div className="d-flex">
           <p className="filter-sub my-2">من:</p>
           <input
+            value={localFrom}
+            onChange={priceFrom}
             className="m-2 text-center"
             type="number"
             style={{ width: "50px", height: "25px" }}
@@ -68,6 +74,8 @@ const SideFilter = () => {
         <div className="d-flex">
           <p className="filter-sub my-2">الي:</p>
           <input
+            value={localTo}
+            onChange={priceTo}
             className="m-2 text-center"
             type="number"
             style={{ width: "50px", height: "25px" }}

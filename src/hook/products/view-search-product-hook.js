@@ -1,10 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllProducts,
-  getAllProductsPage,
-  getAllProductsSearch,
-} from "../../Redux/action/productAction";
+import { getAllProductsSearch } from "../../Redux/action/productAction";
 
 const ViewSearchProductsHook = () => {
   const dispatch = useDispatch();
@@ -12,18 +8,11 @@ const ViewSearchProductsHook = () => {
   let limit = 6;
 
   const getProduct = async () => {
-    let word = "";
-    let queryCategory = "";
-    if (localStorage.getItem("SearchWord") != null) {
-      word = localStorage.getItem("SearchWord");
-    }
-    if (localStorage.getItem("CategoryChecked") != null) {
-      queryCategory = localStorage.getItem("CategoryChecked");
-    }
+    getStorage();
     sortData();
     await dispatch(
       getAllProductsSearch(
-        `sort=${sort}&limit=${limit}&keyword=${word}&${queryCategory}`
+        `sort=${sort}&limit=${limit}&keyword=${word}&${queryCategory}&${queryBrand}${priceFormString}${priceToString}`
       )
     );
   };
@@ -31,11 +20,26 @@ const ViewSearchProductsHook = () => {
   useEffect(() => {
     // dispatch(getAllProductsSearch(`limit=${limit}&keyword=${word}`));
     getProduct();
-  }, [dispatch]);
+  }, []);
 
   const onPress = async (page) => {
-    let word = "";
-    let queryCategory = "";
+    getStorage();
+    sortData();
+    await dispatch(
+      getAllProductsSearch(
+        `sort=${sort}&limit=${limit}&page=${page}&keyword=${word}&${queryCategory}&${queryBrand}${priceFormString}${priceToString}`
+      )
+    );
+  };
+
+  let word = "";
+  let queryCategory = "";
+  let queryBrand = "";
+  let priceForm = "";
+  let priceTo = "";
+  let priceFormString = "";
+  let priceToString = "";
+  const getStorage = () => {
     if (localStorage.getItem("SearchWord") != null) {
       word = localStorage.getItem("SearchWord");
     }
@@ -43,12 +47,30 @@ const ViewSearchProductsHook = () => {
     if (localStorage.getItem("CategoryChecked") != null) {
       queryCategory = localStorage.getItem("CategoryChecked");
     }
-    sortData();
-    await dispatch(
-      getAllProductsSearch(
-        `sort=${sort}&limit=${limit}&page=${page}&keyword=${word}&${queryCategory}`
-      )
-    );
+
+    if (localStorage.getItem("BrandChecked") != null) {
+      queryBrand = localStorage.getItem("BrandChecked");
+    }
+
+    if (localStorage.getItem("PriceForm") != null) {
+      priceForm = localStorage.getItem("PriceForm");
+    }
+
+    if (localStorage.getItem("PriceTo") != null) {
+      priceTo = localStorage.getItem("PriceTo");
+    }
+
+    if (priceForm === "" || priceForm <= 0) {
+      priceFormString = "";
+    } else {
+      priceFormString = `&price[gt]=${priceForm}`;
+    }
+
+    if (priceTo === "" || priceTo <= 0) {
+      priceToString = "";
+    } else {
+      priceToString = `&price[lte]=${priceTo}`;
+    }
   };
 
   const allProducts = useSelector((state) => state.allProducts.allProducts);
