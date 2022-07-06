@@ -10,6 +10,12 @@ const NavbarSearchHook = () => {
   const onChangeSearch = (e) => {
     localStorage.setItem("SearchWord", e.target.value);
     setSearchWord(e.target.value);
+
+    let path = window.location.pathname;
+
+    if (path != "/products") {
+      window.location.href = "/products";
+    }
   };
 
   useEffect(() => {
