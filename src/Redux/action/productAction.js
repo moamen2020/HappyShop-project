@@ -1,6 +1,6 @@
 import { useInsertDataWithImage } from "../../hooks/useInsertData";
 import { useUpdateDataWithImage } from "../../hooks/useUpdateData";
-import useGetData from "../../hooks/useDetData";
+import { useGetData } from "../../hooks/useGetData";
 import useDeleteData from "../../hooks/useDeleteData";
 
 import {

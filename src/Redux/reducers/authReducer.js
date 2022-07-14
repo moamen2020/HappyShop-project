@@ -1,8 +1,9 @@
-import { CREATE_NEW_USER, LOGIN_USER } from "../type";
+import { CREATE_NEW_USER, LOGIN_USER, GET_CURRENT_USER } from "../type";
 
 const initial = {
   createUser: [],
   loginUser: [],
+  currentUser: [],
   loading: true,
 };
 const authReducer = (state = initial, action) => {
@@ -16,6 +17,11 @@ const authReducer = (state = initial, action) => {
       return {
         ...state,
         loginUser: action.payload,
+      };
+    case GET_CURRENT_USER:
+      return {
+        ...state,
+        currentUser: action.payload,
       };
     default:
       return state;

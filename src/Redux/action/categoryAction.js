@@ -1,4 +1,4 @@
-import useGetData from "../../hooks/useDetData";
+import { useGetData } from "../../hooks/useGetData";
 import { useInsertDataWithImage } from "../../hooks/useInsertData";
 import {
   GET_ALL_CATEGORY,

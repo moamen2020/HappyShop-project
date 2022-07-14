@@ -1,5 +1,5 @@
 import { useInsertData } from "../../hooks/useInsertData";
-import useDetData from "../../hooks/useDetData";
+import { useGetData } from "../../hooks/useGetData";
 
 import { GET_ERROR, CREATE_SUB_CATEGORY, GET_SUB_CATEGORY } from "../type";
 
@@ -25,7 +25,7 @@ export const createSubCategory = (data) => async (dispatch) => {
 // Get subcategory in depend in category id
 export const getSubCategory = (id) => async (dispatch) => {
   try {
-    const response = await useDetData(`/api/v1/categories/${id}/subcategories`);
+    const response = await useGetData(`/api/v1/categories/${id}/subcategories`);
     console.log(response);
 
     dispatch({

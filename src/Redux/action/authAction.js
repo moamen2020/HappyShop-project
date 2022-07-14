@@ -1,5 +1,6 @@
-import { CREATE_NEW_USER, LOGIN_USER, GET_ERROR } from "../type";
+import { CREATE_NEW_USER, LOGIN_USER, GET_CURRENT_USER } from "../type";
 import { useInsertData } from "../../hooks/useInsertData";
+import { useGetDataToken } from "../../hooks/useGetData";
 
 // Create new User
 export const createNewUser = (data) => async (dispatch) => {
@@ -14,7 +15,7 @@ export const createNewUser = (data) => async (dispatch) => {
     });
   } catch (e) {
     dispatch({
-      type: GET_ERROR,
+      type: CREATE_NEW_USER,
       payload: e.response,
     });
   }
@@ -32,7 +33,25 @@ export const loginUser = (data) => async (dispatch) => {
     });
   } catch (e) {
     dispatch({
-      type: GET_ERROR,
+      type: LOGIN_USER,
+      payload: e.response,
+    });
+  }
+};
+
+// Login User
+export const getLoggedUser = () => async (dispatch) => {
+  try {
+    const response = await useGetDataToken(`/api/v1/users/getMe`);
+
+    dispatch({
+      type: GET_CURRENT_USER,
+      payload: response,
+      loading: true,
+    });
+  } catch (e) {
+    dispatch({
+      type: GET_CURRENT_USER,
       payload: e.response,
     });
   }

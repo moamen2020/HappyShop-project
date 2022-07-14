@@ -50,11 +50,7 @@ const NavBarLogin = () => {
           />
           <Nav className="me-auto">
             {user != "" ? (
-              <NavDropdown
-                className="text-center mt-3"
-                title={user.name}
-                id="basic-nav-dropdown"
-              >
+              <NavDropdown title={user.name} id="basic-nav-dropdown">
                 {user.role === "admin" ? (
                   <NavDropdown.Item href="/admin/allproducts">
                     لوحة التحكم
