@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import notify from "../../hook/useNotifaction";
-import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../Redux/action/authAction";
 
 const LoginHook = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(true);
+  const [isPress, setIsPress] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -19,8 +19,9 @@ const LoginHook = () => {
     setPassword(e.target.value);
   };
 
-  const onsubmit = async () => {
+  const onSubmit = async () => {
     setLoading(true);
+    setIsPress(true);
     await dispatch(
       loginUser({
         email,
@@ -28,15 +29,18 @@ const LoginHook = () => {
       })
     );
     setLoading(false);
+    setIsPress(false);
   };
 
   const res = useSelector((state) => state.authReducer.loginUser);
+
   useEffect(() => {
     if (loading === false) {
       if (res) {
-        if (res.data.token) {
-          localStorage.setItem("token", res.data.token);
-          localStorage.setItem("user", JSON.stringify(res.data.data));
+        if (res.token) {
+          console.log(res.token);
+          localStorage.setItem("token", res.token);
+          localStorage.setItem("user", JSON.stringify(res.data));
           notify("تم تسجيل الدخول بنجاح", "success");
           setTimeout(() => {
             window.location.href = "/";
@@ -45,11 +49,26 @@ const LoginHook = () => {
           localStorage.removeItem("token");
           localStorage.removeItem("user");
         }
+
+        if (res.message === "Incorrect email or password") {
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
+          notify("كلمة السر او الايميل خطا", "error");
+        }
+        setLoading(true);
       }
     }
   }, [loading]);
 
-  return [email, password, loading, onChangeEmail, onChangePassword, onsubmit];
+  return [
+    email,
+    password,
+    loading,
+    onChangeEmail,
+    onChangePassword,
+    onSubmit,
+    isPress,
+  ];
 };
 
 export default LoginHook;

@@ -2,10 +2,18 @@ import React from "react";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import LoginHook from "../../hook/auth/login-hook";
+import { ToastContainer } from "react-toastify";
 
 const LoginPage = () => {
-  const [email, password, loading, onChangeEmail, onChangePassword, onsubmit] =
-    LoginHook();
+  const [
+    email,
+    password,
+    loading,
+    onChangeEmail,
+    onChangePassword,
+    onSubmit,
+    isPress,
+  ] = LoginHook();
   return (
     <Container style={{ minHeight: "680px" }}>
       <Row className="py-5 d-flex justify-content-center ">
@@ -25,7 +33,7 @@ const LoginPage = () => {
             type="password"
             className="user-input text-center mx-auto"
           />
-          <button onClick={onsubmit} className="btn-login mx-auto mt-4">
+          <button onClick={onSubmit} className="btn-login mx-auto mt-4">
             تسجيل الدخول
           </button>
           <label className="mx-auto my-4">
@@ -37,7 +45,7 @@ const LoginPage = () => {
             </Link>
           </label>
 
-          {loading ? (
+          {isPress === true ? (
             loading === true ? (
               <Spinner
                 className="my-1 mx-auto"
@@ -48,6 +56,7 @@ const LoginPage = () => {
           ) : null}
         </Col>
       </Row>
+      <ToastContainer />
     </Container>
   );
 };

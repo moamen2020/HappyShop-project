@@ -24,7 +24,6 @@ export const createNewUser = (data) => async (dispatch) => {
 export const loginUser = (data) => async (dispatch) => {
   try {
     const response = await useInsertData(`/api/v1/auth/login`, data);
-    console.log(response);
 
     dispatch({
       type: LOGIN_USER,

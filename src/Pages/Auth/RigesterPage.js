@@ -17,7 +17,7 @@ const Rigester = () => {
     onChangePhone,
     onChangePassword,
     onChangeConfirmPassword,
-    onsubmit,
+    onSubmit,
   ] = RegisterHook();
   return (
     <Container style={{ minHeight: "680px" }}>
@@ -59,7 +59,7 @@ const Rigester = () => {
             type="password"
             className="user-input text-center mt-3 mx-auto"
           />
-          <button onClick={onsubmit} className="btn-login mx-auto mt-4">
+          <button onClick={onSubmit} className="btn-login mx-auto mt-4">
             تسجيل الحساب
           </button>
           <label className="mx-auto my-4">
