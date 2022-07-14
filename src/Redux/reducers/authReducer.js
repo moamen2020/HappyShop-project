@@ -1,7 +1,8 @@
-import { CREATE_NEW_USER, GET_ERROR } from "../type";
+import { CREATE_NEW_USER, LOGIN_USER } from "../type";
 
 const initial = {
   createUser: [],
+  loginUser: [],
   loading: true,
 };
 const authReducer = (state = initial, action) => {
@@ -10,12 +11,11 @@ const authReducer = (state = initial, action) => {
       return {
         ...state,
         createUser: action.payload,
-        loading: false,
       };
-    case GET_ERROR:
+    case LOGIN_USER:
       return {
-        loading: true,
-        createUser: action.payload,
+        ...state,
+        loginUser: action.payload,
       };
     default:
       return state;
