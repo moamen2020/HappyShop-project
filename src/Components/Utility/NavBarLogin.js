@@ -1,5 +1,11 @@
-import React from "react";
-import { Navbar, Nav, Container, FormControl } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import {
+  Navbar,
+  Container,
+  FormControl,
+  Nav,
+  NavDropdown,
+} from "react-bootstrap";
 import logo from "../../images/logo.png";
 import login from "../../images/login.png";
 import cart from "../../images/cart.png";
@@ -8,18 +14,34 @@ import NavbarSearchHook from "../../hook/search/navbar-search-hook";
 
 const NavBarLogin = () => {
   const [onChangeSearch, searchWord] = NavbarSearchHook();
+
+  let word = "";
+  if (localStorage.getItem("searchWord") != null)
+    word = localStorage.getItem("searchWord");
+
+  const [user, setUser] = useState("");
+  useEffect(() => {
+    if (localStorage.getItem("user") != null)
+      setUser(JSON.parse(localStorage.getItem("user")));
+  }, []);
+
+  const logOut = () => {
+    localStorage.removeItem("user");
+    setUser("");
+  };
+
   return (
     <Navbar className="sticky-top" bg="dark" variant="dark" expand="sm">
       <Container>
         <Navbar.Brand>
           <a href="/">
-            <img src={logo} className="logo" alt="sfvs" />
+            <img src={logo} className="logo" alt="" />
           </a>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <FormControl
-            value={localStorage.getItem("SearchWord")}
+            value={word}
             onChange={onChangeSearch}
             type="search"
             placeholder="ابحث..."
@@ -27,14 +49,36 @@ const NavBarLogin = () => {
             aria-label="Search"
           />
           <Nav className="me-auto">
-            <Nav.Link
-              href="/login"
-              className="nav-text d-flex mt-3 justify-content-center"
-            >
-              <img src={login} className="login-img" alt="sfvs" />
+            {user != "" ? (
+              <NavDropdown
+                className="text-center mt-3"
+                title={user.name}
+                id="basic-nav-dropdown"
+              >
+                {user.role === "admin" ? (
+                  <NavDropdown.Item href="/admin/allproducts">
+                    لوحة التحكم
+                  </NavDropdown.Item>
+                ) : (
+                  <NavDropdown.Item href="/user/profile">
+                    الصفحه الشخصية
+                  </NavDropdown.Item>
+                )}
+                <NavDropdown.Divider />
+                <NavDropdown.Item onClick={logOut} href="/">
+                  تسجيل خروج
+                </NavDropdown.Item>
+              </NavDropdown>
+            ) : (
+              <Nav.Link
+                href="/login"
+                className="nav-text d-flex mt-3 justify-content-center"
+              >
+                <img src={login} className="login-img" alt="sfvs" />
+                <p style={{ color: "white" }}>دخول</p>
+              </Nav.Link>
+            )}
 
-              <p style={{ color: "white" }}>دخول</p>
-            </Nav.Link>
             <Nav.Link
               href="/cart"
               className="nav-text d-flex mt-3 justify-content-center"
