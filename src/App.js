@@ -25,6 +25,7 @@ import UserAllAddressPage from "./Pages/User/UserAllAddressPage";
 import UserAddAddressPage from "./Pages/User/UserAddAddressPage";
 import UserEditAddressPage from "./Pages/User/UserEditAddressPage";
 import UserProfilePage from "./Pages/User/UserProfilePage";
+import ForgotPasswordPage from "./Pages/Auth/ForgotPasswordPage";
 
 function App() {
   return (
@@ -55,13 +56,16 @@ function App() {
             path="/admin/editproduct/:id"
             element={<AdminEditProductPage />}
           />
-
           <Route path="/user/all-orders" element={<UserAllOrdersPage />} />
           <Route path="/user/favorite" element={<UserFavoritePage />} />
           <Route path="/user/address" element={<UserAllAddressPage />} />
           <Route path="/user/add-address" element={<UserAddAddressPage />} />
           <Route path="/user/edit-address" element={<UserEditAddressPage />} />
           <Route path="/user/user-profile" element={<UserProfilePage />} />
+          <Route
+            path="/user/forget-password"
+            element={<ForgotPasswordPage />}
+          />
         </Routes>
       </BrowserRouter>
       <Footer />

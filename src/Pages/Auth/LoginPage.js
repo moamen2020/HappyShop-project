@@ -45,6 +45,15 @@ const LoginPage = () => {
             </Link>
           </label>
 
+          <label className="mx-auto my-4">
+            <Link
+              to="/user/forget-password"
+              style={{ textDecoration: "none", color: "red" }}
+            >
+              هل نسيت كلمة السر
+            </Link>
+          </label>
+
           {isPress === true ? (
             loading === true ? (
               <Spinner
