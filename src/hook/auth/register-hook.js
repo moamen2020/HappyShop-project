@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import notify from "../../hook/useNotifaction";
 import { createNewUser } from "../../Redux/action/authAction";
+import { useNavigate } from "react-router-dom";
 
 const RegisterHook = () => {
   const [name, setName] = useState("");
@@ -10,8 +11,10 @@ const RegisterHook = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setloading] = useState(true);
+
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.authReducer.createUser);
+  const navigate = useNavigate();
+  const res = useSelector((state) => state.authReducer.createUser);
 
   const onChangeName = (e) => {
     setName(e.target.value);
@@ -67,20 +70,31 @@ const RegisterHook = () => {
 
   useEffect(() => {
     if (loading === false) {
-      if (user) {
-        if (user.data.token) {
-          localStorage.setItem("token", user.data.token);
+      if (res) {
+        console.log(res);
+        if (res.data.token) {
+          localStorage.setItem("token", res.data.token);
+          notify("تم تسجيل الحساب بنجاح", "success");
+          setTimeout(() => {
+            navigate("/login");
+          }, 2000);
         }
 
-        if (user.data.error) {
-          if (user.data.errors[0].msg == "E-mail already in use") {
+        if (res.data.errors) {
+          if (res.data.errors[0].msg === "E-mail already in use")
             notify("هذا الايميل مسجل من قبل", "error");
-          }
+        }
+        if (res.data.errors) {
+          if (res.data.errors[0].msg === "accept only egypt phone numbers")
+            notify("يجب ان يكون الرقم مصري مكون من 11 رقم", "error");
+        }
+
+        if (res.data.errors) {
+          if (res.data.errors[0].msg === "must be at least 6 chars")
+            notify("يجب ان لاقل كلمه السر عن 6 احرف او ارقام", "error");
         }
       }
     }
-
-    console.log(user);
   }, [loading]);
 
   return [
