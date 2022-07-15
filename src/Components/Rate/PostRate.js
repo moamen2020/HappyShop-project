@@ -2,8 +2,11 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";
 import AddRateHook from "../../hook/review/add-rate-hook";
+import { ToastContainer } from "react-toastify";
+import { useParams } from "react-router-dom";
 
 const PostRate = () => {
+  const { id } = useParams();
   const [
     rateText,
     rateValue,
@@ -11,7 +14,7 @@ const PostRate = () => {
     onChangeRateText,
     onChangeRateValue,
     onSubmit,
-  ] = AddRateHook();
+  ] = AddRateHook(id);
 
   var name = "";
 
@@ -61,6 +64,7 @@ const PostRate = () => {
           </div>
         </Col>
       </Row>
+      <ToastContainer />
     </div>
   );
 };
