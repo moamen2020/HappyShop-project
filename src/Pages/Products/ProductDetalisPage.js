@@ -12,15 +12,17 @@ const ProductDetalisPage = () => {
   const [item, images, category, brand, productsLike] =
     ViewProductDetailsHook(id);
 
-  console.log("-----------------------------------------------------");
-  console.log(productsLike);
-  console.log("-----------------------------------------------------");
+  if (item) {
+    var rataAvg = item.ratingsAverage;
+    var rataQty = item.ratingsQuantity;
+  }
+
   return (
     <div style={{ minHeight: "670px" }}>
       <CategorysHeader />
       <Container>
         <ProductDetails />
-        <RateContainer />
+        <RateContainer rataAvg={rataAvg} rataQty={rataQty} />
         <CardProductsContainer
           products={productsLike}
           title="منتجات قد تعجبك"

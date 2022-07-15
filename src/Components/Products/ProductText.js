@@ -8,13 +8,6 @@ const ProductsText = () => {
 
   const [item, images, category, brand] = ViewProductDetailsHook(id);
 
-  console.log("=================+++++++++++++++===================");
-  console.log(category);
-  console.log(category);
-  console.log(category);
-  console.log(category);
-  console.log("=================+++++++++++++++===================");
-
   return (
     <div>
       <Row className="mt-2">

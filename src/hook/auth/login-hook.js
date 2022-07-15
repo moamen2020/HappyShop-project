@@ -37,10 +37,10 @@ const LoginHook = () => {
   useEffect(() => {
     if (loading === false) {
       if (res) {
-        if (res.token) {
-          console.log(res.token);
-          localStorage.setItem("token", res.token);
-          localStorage.setItem("user", JSON.stringify(res.data));
+        if (res.data.token) {
+          console.log(res.data.token);
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("user", JSON.stringify(res.data.data));
           notify("تم تسجيل الدخول بنجاح", "success");
           setTimeout(() => {
             window.location.href = "/";
@@ -50,7 +50,7 @@ const LoginHook = () => {
           localStorage.removeItem("user");
         }
 
-        if (res.message === "Incorrect email or password") {
+        if (res.data.message === "Incorrect email or password") {
           localStorage.removeItem("token");
           localStorage.removeItem("user");
           notify("كلمة السر او الايميل خطا", "error");

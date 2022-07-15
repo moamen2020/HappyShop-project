@@ -71,25 +71,25 @@ const RegisterHook = () => {
   useEffect(() => {
     if (loading === false) {
       if (res) {
-        if (res.token) {
-          localStorage.setItem("token", res.token);
+        if (res.data.token) {
+          localStorage.setItem("token", res.data.token);
           notify("تم تسجيل الحساب بنجاح", "success");
           setTimeout(() => {
             navigate("/login");
           }, 2000);
         }
 
-        if (res.errors) {
-          if (res.errors[0].msg === "E-mail already in use")
+        if (res.data.errors) {
+          if (res.data.errors[0].msg === "E-mail already in use")
             notify("هذا الايميل مسجل من قبل", "error");
         }
-        if (res.errors) {
-          if (res.errors[0].msg === "accept only egypt phone numbers")
+        if (res.data.errors) {
+          if (res.data.errors[0].msg === "accept only egypt phone numbers")
             notify("يجب ان يكون الرقم مصري مكون من 11 رقم", "error");
         }
 
-        if (res.errors) {
-          if (res.errors[0].msg === "must be at least 6 chars")
+        if (res.data.errors) {
+          if (res.data.errors[0].msg === "must be at least 6 chars")
             notify("يجب ان لاقل كلمه السر عن 6 احرف او ارقام", "error");
         }
       }

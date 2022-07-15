@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { resetPassword } from "../../redux/actions/authAction";
+import { resetPassword } from "../../Redux/action/authAction";
 import { useNavigate } from "react-router-dom";
 import notify from "../useNotifaction";
 
