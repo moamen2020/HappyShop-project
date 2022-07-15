@@ -26,6 +26,7 @@ import UserAddAddressPage from "./Pages/User/UserAddAddressPage";
 import UserEditAddressPage from "./Pages/User/UserEditAddressPage";
 import UserProfilePage from "./Pages/User/UserProfilePage";
 import ForgotPasswordPage from "./Pages/Auth/ForgotPasswordPage";
+import VerifyPasswordPage from "./Pages/Auth/VerifyPasswordPage";
 
 function App() {
   return (
@@ -66,6 +67,7 @@ function App() {
             path="/user/forget-password"
             element={<ForgotPasswordPage />}
           />
+          <Route path="/user/verify-code" element={<VerifyPasswordPage />} />
         </Routes>
       </BrowserRouter>
       <Footer />
