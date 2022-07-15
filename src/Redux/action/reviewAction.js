@@ -28,3 +28,22 @@ export const createReview = (prodID, body) => async (dispatch) => {
     });
   }
 };
+
+//get all review to one product
+export const allReviewProduct = (prodID, page, limit) => async (dispatch) => {
+  try {
+    const response = await useGetDataToken(
+      `/api/v1/products/${prodID}/reviews?page=${page}&limit=${limit}`
+    );
+
+    dispatch({
+      type: ALL_REVIEW_PRODUCT,
+      payload: response,
+    });
+  } catch (e) {
+    dispatch({
+      type: ALL_REVIEW_PRODUCT,
+      payload: e.response,
+    });
+  }
+};

@@ -13,8 +13,8 @@ const ProductDetalisPage = () => {
     ViewProductDetailsHook(id);
 
   if (item) {
-    var rataAvg = item.ratingsAverage;
-    var rataQty = item.ratingsQuantity;
+    var rateAvg = item.ratingsAverage;
+    var rateQty = item.ratingsQuantity;
   }
 
   return (
@@ -22,7 +22,7 @@ const ProductDetalisPage = () => {
       <CategorysHeader />
       <Container>
         <ProductDetails />
-        <RateContainer rataAvg={rataAvg} rataQty={rataQty} />
+        <RateContainer rateAvg={rateAvg} rateQty={rateQty} />
         <CardProductsContainer
           products={productsLike}
           title="منتجات قد تعجبك"
