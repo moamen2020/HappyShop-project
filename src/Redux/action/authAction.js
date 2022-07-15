@@ -4,9 +4,11 @@ import {
   GET_CURRENT_USER,
   FORGET_PASSWORD,
   VERIFY_PASSWORD,
+  RESET_PASSWORD,
 } from "../type";
 import { useInsertData } from "../../hooks/useInsertData";
 import { useGetDataToken } from "../../hooks/useGetData";
+import { useUpdateData } from "../../hooks/useUpdateData";
 
 // Create new User
 export const createNewUser = (data) => async (dispatch) => {
@@ -95,6 +97,23 @@ export const verifyPassword = (data) => async (dispatch) => {
   } catch (e) {
     dispatch({
       type: VERIFY_PASSWORD,
+      payload: e.response,
+    });
+  }
+};
+
+//2-reset  passwrod
+export const resetPassword = (data) => async (dispatch) => {
+  try {
+    const response = await useUpdateData(`/api/v1/auth/resetPassword`, data);
+    dispatch({
+      type: RESET_PASSWORD,
+      payload: response,
+      loading: true,
+    });
+  } catch (e) {
+    dispatch({
+      type: RESET_PASSWORD,
       payload: e.response,
     });
   }
