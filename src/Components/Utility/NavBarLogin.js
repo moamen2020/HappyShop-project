@@ -57,7 +57,7 @@ const NavBarLogin = () => {
                     لوحة التحكم
                   </NavDropdown.Item>
                 ) : (
-                  <NavDropdown.Item href="/user/profile">
+                  <NavDropdown.Item href="/user/user-profile">
                     الصفحه الشخصية
                   </NavDropdown.Item>
                 )}
