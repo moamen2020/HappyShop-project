@@ -4,9 +4,40 @@ import rate from "../../images/rate.png";
 import deleteicon from "../../images/delete.png";
 import editicon from "../../images/edit.png";
 import DeleteRateHook from "../../hook/review/delete-rate-hook";
+import EditRateHook from "../../hook/review/edit-rate-hook";
+import ReactStars from "react-rating-stars-component";
+
 const RateItem = ({ review }) => {
   const [isUser, showDelete, handelDelete, handleShow, handleClose] =
     DeleteRateHook(review);
+
+  const [
+    showEdit,
+    newRateText,
+    newRateValue,
+    handleCloseEdit,
+    handleShowEdit,
+    handelEdit,
+    onChangeRateText,
+    OnChangeRateValue,
+  ] = EditRateHook(review);
+
+  const setting = {
+    size: 20,
+    count: 5,
+    color: "#979797",
+    activeColor: "#ffc107",
+    value: newRateValue,
+    a11y: true,
+    isHalf: true,
+    emptyIcon: <i className="far fa-star" />,
+    halfIcon: <i className="fa fa-star-half-alt" />,
+    filledIcon: <i className="fa fa-star" />,
+    onChange: (newValue) => {
+      OnChangeRateValue(newValue);
+    },
+  };
+
   return (
     <div>
       <Modal show={showDelete} onHide={handleClose}>
@@ -25,6 +56,33 @@ const RateItem = ({ review }) => {
           </Button>
           <Button className="font" variant="dark" onClick={handelDelete}>
             حذف
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={showEdit} onHide={handleCloseEdit}>
+        <Modal.Header>
+          <Modal.Title>
+            {" "}
+            <div className="font">تعديل التقييم</div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <ReactStars {...setting} />
+          <input
+            onChange={onChangeRateText}
+            value={newRateText}
+            type="text"
+            className="font w-100"
+            style={{ border: "none" }}
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button className="font" variant="success" onClick={handleCloseEdit}>
+            تراجع
+          </Button>
+          <Button className="font" variant="dark" onClick={handelEdit}>
+            تعديل
           </Button>
         </Modal.Footer>
       </Modal>
@@ -52,6 +110,7 @@ const RateItem = ({ review }) => {
 
               <img
                 src={editicon}
+                onClick={handleShowEdit}
                 width="20px"
                 height="20px"
                 style={{ cursor: "pointer" }}
