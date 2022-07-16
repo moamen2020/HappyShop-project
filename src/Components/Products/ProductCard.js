@@ -3,6 +3,7 @@ import { Card, Col } from "react-bootstrap";
 import favoff from "../../images/fav-off.png";
 import rate from "../../images/rate.png";
 import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import ProductCardHook from "../../hook/products/product-card-hook";
 
 const ProductCard = ({ product, favProd }) => {
@@ -69,6 +70,7 @@ const ProductCard = ({ product, favProd }) => {
           </Card.Text>
         </Card.Body>
       </Card>
+      <ToastContainer />
     </Col>
   );
 };
