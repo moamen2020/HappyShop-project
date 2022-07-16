@@ -4,7 +4,6 @@ import ProductCard from "./ProductCard";
 import SubTitle from "../Utility/SubTitle.js";
 
 const CardProductsContainer = ({ title, btntitle, pathText, products }) => {
-  console.log(products);
   return (
     <Container>
       <SubTitle title={title} btntitle={btntitle} pathText={pathText} />

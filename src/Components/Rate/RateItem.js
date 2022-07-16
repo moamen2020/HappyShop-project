@@ -6,7 +6,7 @@ import editicon from "../../images/edit.png";
 import DeleteRateHook from "../../hook/review/delete-rate-hook";
 const RateItem = ({ review }) => {
   const [isUser, showDelete, handelDelete, handleShow, handleClose] =
-    DeleteRateHook();
+    DeleteRateHook(review);
   return (
     <div>
       <Modal show={showDelete} onHide={handleClose}>

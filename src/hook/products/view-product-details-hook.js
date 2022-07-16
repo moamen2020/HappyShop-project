@@ -51,12 +51,6 @@ const ViewProductDetailsHook = (id) => {
 
   let productsLike = [];
   if (allProductsLike.data) productsLike = allProductsLike.data.slice(0, 4);
-  console.log("=================================================");
-  console.log(category);
-  console.log(category);
-  console.log(category);
-  console.log(category);
-  console.log("=================================================");
 
   return [item, images, category, brand, productsLike];
 };
