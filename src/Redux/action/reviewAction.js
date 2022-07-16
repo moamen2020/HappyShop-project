@@ -4,10 +4,10 @@ import {
   DELETE_REVIEW,
   ALL_REVIEW_PRODUCT,
 } from "../type";
-import { useGetData, useGetDataToken } from "../../hooks/useGetData";
+import { useGetDataToken } from "../../hooks/useGetData";
 import { useInsertData } from "../../hooks/useInsertData";
 import useDeleteData from "./../../hooks/useDeleteData";
-import { useInsUpdateData } from "../../hooks/useUpdateData";
+import { useUpdateData } from "../../hooks/useUpdateData";
 
 //create rate
 export const createReview = (prodID, body) => async (dispatch) => {
@@ -60,6 +60,23 @@ export const deleteReviewOnProduct = (id) => async (dispatch) => {
   } catch (e) {
     dispatch({
       type: DELETE_REVIEW,
+      payload: e.response,
+    });
+  }
+};
+
+//update review to one product
+export const updateReviewOnProduct = (id, body) => async (dispatch) => {
+  try {
+    const response = await useUpdateData(`/api/v1/reviews/${id}`, body);
+
+    dispatch({
+      type: UPDATE_REVIEW,
+      payload: response,
+    });
+  } catch (e) {
+    dispatch({
+      type: UPDATE_REVIEW,
       payload: e.response,
     });
   }

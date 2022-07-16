@@ -31,6 +31,11 @@ const reviewReducer = (state = inital, action) => {
         ...state,
         deleteReview: action.payload,
       };
+    case UPDATE_REVIEW:
+      return {
+        ...state,
+        updateReview: action.payload,
+      };
     default:
       return state;
   }

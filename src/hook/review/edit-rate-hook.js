@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import notify from "../useNotifaction";
+import { updateReviewOnProduct } from "./../../Redux/action/reviewAction";
 const EditRateHook = (review) => {
   const dispatch = useDispatch();
 
@@ -22,12 +23,16 @@ const EditRateHook = (review) => {
 
   const handelEdit = async () => {
     setLoading(true);
-
+    await dispatch(
+      updateReviewOnProduct(review._id, {
+        review: newRateText,
+        rating: newRateValue,
+      })
+    );
     setLoading(false);
     handleCloseEdit();
   };
   const res = useSelector((state) => state.reviewReducer.updateReview);
-
   useEffect(() => {
     if (loading === false) {
       console.log(res);
