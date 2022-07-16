@@ -1,6 +1,8 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import rate from "../../images/rate.png";
+import deleteicon from "../../images/delete.png";
+import editicon from "../../images/edit.png";
 const RateItem = ({ review }) => {
   return (
     <div>
@@ -12,8 +14,25 @@ const RateItem = ({ review }) => {
         </Col>
       </Row>
       <Row className="border-bottom mx-2">
-        <Col className="d-felx me-4 pb-2">
+        <Col className="d-flex justify-content-between me-4 pb-2">
           <div className="rate-description  d-inline ms-2">{review.review}</div>
+          <div className="d-inline ">
+            <img
+              src={deleteicon}
+              width="20px"
+              height="20px"
+              style={{ cursor: "pointer" }}
+              alt="delete"
+            />
+
+            <img
+              src={editicon}
+              width="20px"
+              height="20px"
+              style={{ cursor: "pointer" }}
+              alt="delete"
+            />
+          </div>
         </Col>
       </Row>
     </div>
