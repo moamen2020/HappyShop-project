@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addCoupon } from "../../Redux/action/couponAction";
+import { addCoupon, getAllCoupon } from "../../Redux/action/couponAction";
 import notify from "./../useNotifaction";
 
 const AddCouponHook = () => {
@@ -56,6 +56,20 @@ const AddCouponHook = () => {
     }
   }, [loading]);
 
+  useEffect(() => {
+    const get = async () => {
+      await dispatch(getAllCoupon());
+    };
+    get();
+  }, []);
+
+  const allCoupon = useSelector((state) => state.couponReducer.allCoupon);
+
+  let coupons = [];
+  try {
+    if (allCoupon && allCoupon.data.length >= 1) coupons = allCoupon.data;
+  } catch (e) {}
+
   return [
     coupnName,
     couponDate,
@@ -64,6 +78,7 @@ const AddCouponHook = () => {
     onChangeDate,
     onChangeValue,
     onSubmit,
+    coupons,
   ];
 };
 

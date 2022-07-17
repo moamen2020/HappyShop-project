@@ -20,6 +20,26 @@ const couponReducer = (state = inital, action) => {
         ...state,
         addCoupon: action.payload,
       };
+    case GET_ALL_COUPON:
+      return {
+        ...state,
+        allCoupon: action.payload,
+      };
+    case DELTET_COUPON:
+      return {
+        ...state,
+        deleteCoupon: action.payload,
+      };
+    case GET_ONE_COUPON:
+      return {
+        ...state,
+        oneCoupon: action.payload,
+      };
+    case EDIT_COUPON:
+      return {
+        ...state,
+        editCoupon: action.payload,
+      };
     default:
       return state;
   }

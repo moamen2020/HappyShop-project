@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
-import { Row, Col, Spinner } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
-import AddCouponHook from "../../hook/coupon/add-coupon-hook";
-import AdminCouponCard from "./AdminCouponCard";
+import EditCouponHook from "../../hook/coupon/edit-coupon-hook";
+import { useParams } from "react-router-dom";
 
-const AdminAddCoupon = () => {
-  const dateRef = useRef();
+const AdminEditCoupon = () => {
+  const { id } = useParams();
   const [
     coupnName,
     couponDate,
@@ -14,12 +14,12 @@ const AdminAddCoupon = () => {
     onChangeDate,
     onChangeValue,
     onSubmit,
-    coupons,
-  ] = AddCouponHook();
+  ] = EditCouponHook(id);
+
   return (
     <div>
       <Row className="justify-content-start ">
-        <div className="admin-content-text pb-4">اضف كوبون جديد</div>
+        <div className="admin-content-text pb-4">تعديل بيانات الكوبون</div>
         <Col sm="8">
           <input
             value={coupnName}
@@ -29,14 +29,11 @@ const AdminAddCoupon = () => {
             placeholder="اسم الكوبون"
           />
           <input
-            ref={dateRef}
             type="text"
             className="input-form d-block mt-3 px-3"
             placeholder="تاريخ الانتهاء"
             onChange={onChangeDate}
             value={couponDate}
-            onFocus={() => (dateRef.current.type = "date")}
-            onBlur={() => (dateRef.current.type = "text")}
           />
           <input
             value={couponValue}
@@ -50,20 +47,8 @@ const AdminAddCoupon = () => {
       <Row>
         <Col sm="8" className="d-flex justify-content-end ">
           <button onClick={onSubmit} className="btn-save d-inline mt-2 ">
-            حفظ الكوبون
+            حفظ التعديل
           </button>
-        </Col>
-      </Row>
-
-      <Row>
-        <Col sm="8" className="">
-          {coupons ? (
-            coupons.map((item, index) => {
-              return <AdminCouponCard key={index} coupon={item} />;
-            })
-          ) : (
-            <h6>لا يوجد كوبونات حتى الان</h6>
-          )}
         </Col>
       </Row>
 
@@ -72,4 +57,4 @@ const AdminAddCoupon = () => {
   );
 };
 
-export default AdminAddCoupon;
+export default AdminEditCoupon;
