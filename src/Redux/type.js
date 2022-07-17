@@ -39,3 +39,10 @@ export const CREATE_REVIEW = "CREATE_REVIEW";
 export const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
 export const REMOVE_FROM_WISHLIST = "REMOVE_FROM_WISHLIST";
 export const USER_WISHLIST = "USER_WISHLIST";
+
+// Coupon
+export const ADD_COUPON = "ADD_COUPON";
+export const GET_ALL_COUPON = "GET_ALL_COUPON";
+export const EDIT_COUPON = "EDIT_COUPON";
+export const GET_ONE_COUPON = "GET_ONE_COUPON";
+export const DELTET_COUPON = "DELTET_COUPON";
