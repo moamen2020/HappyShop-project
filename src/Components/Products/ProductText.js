@@ -1,12 +1,15 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import AddToCartHook from "../../hook/cart/add-to-cart-hook";
 import ViewProductDetailsHook from "../../hook/products/view-product-details-hook";
 
 const ProductsText = () => {
   const { id } = useParams();
 
   const [item, images, category, brand] = ViewProductDetailsHook(id);
+
+  const [indexColor, colorClick, addToCartHandel] = AddToCartHook(id, item);
 
   return (
     <div>
@@ -30,13 +33,19 @@ const ProductsText = () => {
       <Row>
         <Col md="8" className="mt-1 d-flex">
           {item.availableColors
-            ? item.availableColors.map((color, index) => (
-                <div
-                  key={index}
-                  className="color ms-2 border"
-                  style={{ backgroundColor: color }}
-                ></div>
-              ))
+            ? item.availableColors.map((color, index) => {
+                return (
+                  <div
+                    key={index}
+                    onClick={() => colorClick(index, color)}
+                    className="color ms-2"
+                    style={{
+                      backgroundColor: color,
+                      border: indexColor === index ? "3px solid black" : "none",
+                    }}
+                  ></div>
+                );
+              })
             : null}
         </Col>
       </Row>
@@ -54,7 +63,10 @@ const ProductsText = () => {
           <div className="product-price d-inline px-3 py-3 border">
             {item.price} جنية
           </div>
-          <div className="product-cart-add px-3 py-3 d-inline mx-3">
+          <div
+            onClick={addToCartHandel}
+            className="product-cart-add px-3 py-3 d-inline mx-3"
+          >
             اضف للعربة
           </div>
         </Col>
