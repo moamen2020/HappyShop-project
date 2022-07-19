@@ -25,6 +25,11 @@ const userAddressesReducer = (state = inital, action) => {
         ...state,
         allAddresses: action.payload,
       };
+    case DELETE_USER_ADDRESS:
+      return {
+        ...state,
+        deleteAddress: action.payload,
+      };
     default:
       return state;
   }

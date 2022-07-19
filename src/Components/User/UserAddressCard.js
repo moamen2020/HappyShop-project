@@ -1,11 +1,35 @@
 import React from "react";
-import { Col } from "react-bootstrap";
-import { Row } from "react-bootstrap";
+import { Col, Modal, Button, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import deleteicon from "../../images/delete.png";
+import DeleteAddressHook from "./../../hook/user/delete-address-hook";
+
 const UserAddressCard = ({ item }) => {
+  const [show, handleClose, handleShow, handelDelete] = DeleteAddressHook(
+    item._id
+  );
   return (
     <div className="user-address-card my-3">
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header>
+          <Modal.Title>
+            {" "}
+            <div className="font">تاكيد الحذف</div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="font">هل انتا متاكد من عملية الحذف العنوان</div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button className="font" variant="success" onClick={handleClose}>
+            تراجع
+          </Button>
+          <Button className="font" variant="dark" onClick={handelDelete}>
+            حذف
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
       <Row className="d-flex justify-content-between">
         <Col xs="1">
           <div className="p-2">{item.alias}</div>
@@ -24,7 +48,7 @@ const UserAddressCard = ({ item }) => {
                 <p className="item-delete-edit"> تعديل</p>
               </Link>
             </div>
-            <div className="d-flex ">
+            <div onClick={handleShow} className="d-flex ">
               <img
                 alt=""
                 className="ms-1 mt-2"
@@ -32,7 +56,7 @@ const UserAddressCard = ({ item }) => {
                 height="17px"
                 width="15px"
               />
-              <p className="item-delete-edit"> ازاله</p>
+              <p className="item-delete-edit"> حذف</p>
             </div>
           </div>
         </Col>

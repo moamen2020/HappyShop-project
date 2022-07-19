@@ -1,5 +1,6 @@
 import { useInsertData } from "../../hooks/useInsertData";
 import { useGetDataToken } from "../../hooks/useGetData";
+import useDeleteData from "../../hooks/useDeleteData";
 import {
   ADD_USER_ADDRESS,
   GET_ALL_USER_ADDRESS,
@@ -35,6 +36,23 @@ export const getAllUserAddress = () => async (dispatch) => {
   } catch (e) {
     dispatch({
       type: GET_ALL_USER_ADDRESS,
+      payload: e.response,
+    });
+  }
+};
+
+//delete user Address
+export const deleteUserAddress = (id) => async (dispatch) => {
+  try {
+    const response = await useDeleteData(`/api/v1/addresses/${id}`);
+
+    dispatch({
+      type: DELETE_USER_ADDRESS,
+      payload: response,
+    });
+  } catch (e) {
+    dispatch({
+      type: DELETE_USER_ADDRESS,
       payload: e.response,
     });
   }
