@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { createBrand } from "../../Redux/action/brandAction";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import notify from "../../hook/useNotifaction";
 import { addProductToCart } from "./../../Redux/action/cartAction";
@@ -44,6 +42,9 @@ const AddToCartHook = (prdID, item) => {
     if (loading === false) {
       if (res && res.status === 200) {
         notify("تمت اضافة المنتج للعربه بنجاح", "success");
+        setTimeout(() => {
+          window.location.reload(false);
+        }, 1000);
       } else {
         notify("قم بتسجيل الدخول اولا", "warn");
       }

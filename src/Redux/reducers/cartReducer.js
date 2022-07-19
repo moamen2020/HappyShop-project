@@ -1,8 +1,8 @@
 import {
   ADD_TO_CART,
+  GET_ALL_USER_CART,
   APPALY_COUPON_CART,
   UPDATE_ITEM_FROMCART,
-  GET_ALL_USER_CART,
   DELETE_ITEM_FROMCART,
   CLEAR_ALL_USER_CART,
 } from "../type";
@@ -21,6 +21,11 @@ const cartReducer = (state = inital, action) => {
       return {
         ...state,
         addToCart: action.payload,
+      };
+    case GET_ALL_USER_CART:
+      return {
+        ...state,
+        getAllUserCart: action.payload,
       };
     default:
       return state;

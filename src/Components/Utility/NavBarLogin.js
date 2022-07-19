@@ -11,6 +11,7 @@ import login from "../../images/login.png";
 import cart from "../../images/cart.png";
 import { Link } from "react-router-dom";
 import NavbarSearchHook from "../../hook/search/navbar-search-hook";
+import GetAllUserCartHook from "../../hook/cart/get-all-user-cart-hook";
 
 const NavBarLogin = () => {
   const [onChangeSearch, searchWord] = NavbarSearchHook();
@@ -30,6 +31,14 @@ const NavBarLogin = () => {
     localStorage.removeItem("token");
     setUser("");
   };
+
+  const [
+    itemsNum,
+    cartItems,
+    totalCartPrice,
+    couponNameRes,
+    totalCartPriceAfterDiscount,
+  ] = GetAllUserCartHook();
 
   return (
     <Navbar className="sticky-top" bg="dark" variant="dark" expand="sm">
@@ -84,8 +93,7 @@ const NavBarLogin = () => {
               <img src={cart} className="login-img" alt="sfvs" />
               <p style={{ color: "white" }}>العربه</p>
               <span class="position-absolute top-10 start-0 translate-middle badge rounded-pill bg-danger">
-                {/* {itemsNum || 0} */}
-                10
+                {itemsNum || 0}
               </span>
             </Nav.Link>
           </Nav>

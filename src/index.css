@@ -746,3 +746,9 @@ body {
   color: #212529 !important;
   background-color: white !important;
 }
+
+
+.badge {
+  font-size: 15px !important;
+  font-weight: bold !important;
+}
