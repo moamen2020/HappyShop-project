@@ -1,8 +1,14 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import DeleteCartHook from "../../hook/cart/delete-cart-hook";
 
-const CartCheckout = () => {
+const CartCheckout = ({
+  couponNameRes,
+  totalCartPriceAfterDiscount,
+  totalCartPrice,
+}) => {
+  const [handelDeleteCart] = DeleteCartHook();
   return (
     <Row className="my-1 d-flex justify-content-center cart-checkout pt-3">
       <Col xs="12" className="d-flex  flex-column  ">
@@ -14,7 +20,7 @@ const CartCheckout = () => {
           <button className="copon-btn d-inline ">تطبيق</button>
         </div>
         <div className="product-price d-inline w-100 my-3  border">
-          34000 جنية
+          {totalCartPrice} جنية
         </div>
         <Link
           to="/order/paymethoud"
@@ -23,6 +29,12 @@ const CartCheckout = () => {
         >
           <button className="product-cart-add w-100 px-2"> اتمام الشراء</button>
         </Link>
+        <button
+          onClick={handelDeleteCart}
+          className="product-cart-add w-100 px-2 my-1"
+        >
+          مسح العربة
+        </button>
       </Col>
     </Row>
   );
