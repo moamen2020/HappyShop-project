@@ -2,9 +2,9 @@ import {
   ADD_TO_CART,
   GET_ALL_USER_CART,
   CLEAR_ALL_USER_CART,
-  APPALY_COUPON_CART,
   UPDATE_ITEM_FROMCART,
   DELETE_ITEM_FROMCART,
+  APPALY_COUPON_CART,
 } from "../type";
 
 const inital = {
@@ -31,6 +31,16 @@ const cartReducer = (state = inital, action) => {
       return {
         ...state,
         clearCart: action.payload,
+      };
+    case DELETE_ITEM_FROMCART:
+      return {
+        ...state,
+        deleteItem: action.payload,
+      };
+    case UPDATE_ITEM_FROMCART:
+      return {
+        ...state,
+        updateItem: action.payload,
       };
     default:
       return state;

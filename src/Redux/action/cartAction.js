@@ -2,13 +2,14 @@ import {
   ADD_TO_CART,
   GET_ALL_USER_CART,
   CLEAR_ALL_USER_CART,
-  APPALY_COUPON_CART,
-  UPDATE_ITEM_FROMCART,
   DELETE_ITEM_FROMCART,
+  UPDATE_ITEM_FROMCART,
+  APPALY_COUPON_CART,
 } from "../type";
 import { useInsertData } from "../../hooks/useInsertData";
 import { useGetDataToken } from "../../hooks/useGetData";
 import useDeleteData from "../../hooks/useDeleteData";
+import { useUpdateData } from "../../hooks/useUpdateData";
 
 //add to cart
 export const addProductToCart = (body) => async (dispatch) => {
@@ -30,7 +31,6 @@ export const addProductToCart = (body) => async (dispatch) => {
 export const getAllUserCartItems = () => async (dispatch) => {
   try {
     const response = await useGetDataToken(`/api/v1/cart`);
-    console.log(response);
     dispatch({
       type: GET_ALL_USER_CART,
       payload: response,
@@ -54,6 +54,40 @@ export const clearAllCartItem = () => async (dispatch) => {
   } catch (e) {
     dispatch({
       type: CLEAR_ALL_USER_CART,
+      payload: e.response,
+    });
+  }
+};
+
+//delete cart Item
+export const deleteCartItem = (id) => async (dispatch) => {
+  try {
+    const response = await useDeleteData(`/api/v1/cart/${id}`);
+
+    dispatch({
+      type: DELETE_ITEM_FROMCART,
+      payload: response,
+    });
+  } catch (e) {
+    dispatch({
+      type: DELETE_ITEM_FROMCART,
+      payload: e.response,
+    });
+  }
+};
+
+//update cart Item
+export const updateCartItem = (id, body) => async (dispatch) => {
+  try {
+    const response = await useUpdateData(`/api/v1/cart/${id}`, body);
+    //  console.log(response)
+    dispatch({
+      type: UPDATE_ITEM_FROMCART,
+      payload: response,
+    });
+  } catch (e) {
+    dispatch({
+      type: UPDATE_ITEM_FROMCART,
       payload: e.response,
     });
   }

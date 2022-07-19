@@ -24,7 +24,7 @@ const CartPage = () => {
               return <CartItem key={index} item={item} />;
             })
           ) : (
-            <h6>لا يوجد منتجات فى العربة</h6>
+            <h4 className="mt-3">لا يوجد منتجات فى العربة</h4>
           )}
         </Col>
         <Col xs="6" md="3">

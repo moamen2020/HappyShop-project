@@ -1,6 +1,7 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import DeleteCartHook from "../../hook/cart/delete-cart-hook";
 
 const CartCheckout = ({
@@ -36,6 +37,8 @@ const CartCheckout = ({
           مسح العربة
         </button>
       </Col>
+
+      <ToastContainer />
     </Row>
   );
 };
