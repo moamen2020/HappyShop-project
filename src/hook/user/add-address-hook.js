@@ -53,7 +53,7 @@ const AddAddressHook = () => {
       if (res && res.status === 200) {
         notify("تمت اضافة العنوان بنجاح", "success");
         setTimeout(() => {
-          navigate("/user/addresses");
+          navigate("/user/address");
         }, 1000);
       } else {
         notify("هناك مشكله فى عملية الاضافة ", "error");

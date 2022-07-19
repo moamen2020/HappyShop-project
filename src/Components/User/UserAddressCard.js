@@ -3,12 +3,12 @@ import { Col } from "react-bootstrap";
 import { Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import deleteicon from "../../images/delete.png";
-const UserAddressCard = () => {
+const UserAddressCard = ({ item }) => {
   return (
     <div className="user-address-card my-3">
       <Row className="d-flex justify-content-between">
         <Col xs="1">
-          <div className="p-2">المنزل</div>
+          <div className="p-2">{item.alias}</div>
         </Col>
         <Col xs="4" className="d-flex d-flex justify-content-end">
           <div className="d-flex p-2">
@@ -47,7 +47,7 @@ const UserAddressCard = () => {
               fontSize: "14px",
             }}
           >
-            القاهرة مدينه نصر شارع التسعين عماره ١٤
+            {item.details}
           </div>
         </Col>
       </Row>
@@ -72,7 +72,7 @@ const UserAddressCard = () => {
             }}
             className="mx-2"
           >
-            0021313432423
+            {item.phone}
           </div>
         </Col>
       </Row>
