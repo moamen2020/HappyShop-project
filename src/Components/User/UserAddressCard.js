@@ -44,7 +44,10 @@ const UserAddressCard = ({ item }) => {
                 height="17px"
                 width="15px"
               />
-              <Link to="/user/edit-address" style={{ textDecoration: "none" }}>
+              <Link
+                to={`/user/edit-address/${item._id}`}
+                style={{ textDecoration: "none" }}
+              >
                 <p className="item-delete-edit"> تعديل</p>
               </Link>
             </div>

@@ -69,7 +69,10 @@ function App() {
           <Route path="/user/favorite" element={<UserFavoritePage />} />
           <Route path="/user/address" element={<UserAllAddressPage />} />
           <Route path="/user/add-address" element={<UserAddAddressPage />} />
-          <Route path="/user/edit-address" element={<UserEditAddressPage />} />
+          <Route
+            path="/user/edit-address/:id"
+            element={<UserEditAddressPage />}
+          />
           <Route path="/user/user-profile" element={<UserProfilePage />} />
           <Route
             path="/user/forget-password"
