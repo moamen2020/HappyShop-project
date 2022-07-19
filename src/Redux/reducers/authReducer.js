@@ -5,6 +5,8 @@ import {
   FORGET_PASSWORD,
   VERIFY_PASSWORD,
   RESET_PASSWORD,
+  UPDATE_USER_PROFILE,
+  UPDATE_USER_PASSWORD,
 } from "../type";
 
 const initial = {
@@ -14,6 +16,8 @@ const initial = {
   forgetPassword: [],
   verifyPassword: [],
   resetPassword: [],
+  userProfile: [],
+  userChangePassword: [],
   loading: true,
 };
 const authReducer = (state = initial, action) => {
@@ -47,6 +51,16 @@ const authReducer = (state = initial, action) => {
       return {
         ...state,
         resetPassword: action.payload,
+      };
+    case UPDATE_USER_PROFILE:
+      return {
+        ...state,
+        userProfile: action.payload,
+      };
+    case UPDATE_USER_PASSWORD:
+      return {
+        ...state,
+        userChangePassword: action.payload,
       };
     default:
       return state;

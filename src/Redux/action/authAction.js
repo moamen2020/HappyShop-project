@@ -5,6 +5,8 @@ import {
   FORGET_PASSWORD,
   VERIFY_PASSWORD,
   RESET_PASSWORD,
+  UPDATE_USER_PROFILE,
+  UPDATE_USER_PASSWORD,
 } from "../type";
 import { useInsertData } from "../../hooks/useInsertData";
 import { useGetDataToken } from "../../hooks/useGetData";
@@ -114,6 +116,45 @@ export const resetPassword = (data) => async (dispatch) => {
   } catch (e) {
     dispatch({
       type: RESET_PASSWORD,
+      payload: e.response,
+    });
+  }
+};
+
+//update  user data
+export const updateUserProfileData = (body) => async (dispatch) => {
+  try {
+    const response = await useUpdateData(`/api/v1/users/updateMe`, body);
+    console.log(response);
+    dispatch({
+      type: UPDATE_USER_PROFILE,
+      payload: response,
+      loading: true,
+    });
+  } catch (e) {
+    dispatch({
+      type: UPDATE_USER_PROFILE,
+      payload: e.response,
+    });
+  }
+};
+
+//update  user password
+export const updateUserPassword = (body) => async (dispatch) => {
+  try {
+    const response = await useUpdateData(
+      `/api/v1/users/changeMyPassword`,
+      body
+    );
+    console.log(response);
+    dispatch({
+      type: UPDATE_USER_PASSWORD,
+      payload: response,
+      loading: true,
+    });
+  } catch (e) {
+    dispatch({
+      type: UPDATE_USER_PASSWORD,
       payload: e.response,
     });
   }
