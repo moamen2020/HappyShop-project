@@ -50,6 +50,14 @@ const ProductsText = () => {
         </Col>
       </Row>
 
+      <Row>
+        <Col md="8" className="mt-3 d-flex">
+          <div className="cat-text d-inline">
+            الكمية المتاحة : {item.quantity}{" "}
+          </div>
+        </Col>
+      </Row>
+
       <Row className="mt-4">
         <div className="cat-text">المواصفات :</div>
       </Row>
