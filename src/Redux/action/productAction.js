@@ -12,6 +12,7 @@ import {
   DELETE_PRODUCT,
   UPDATE_PRODUCT,
   GET_ALL_PRODUCTS_CATEGORY,
+  GET_ALL_PRODUCTS_BRAND,
 } from "../type";
 
 // Create new Product
@@ -63,6 +64,26 @@ export const getAllProductsByCategory =
     } catch (e) {
       dispatch({
         type: GET_ALL_PRODUCTS_CATEGORY,
+        payload: e.response,
+      });
+    }
+  };
+
+//get all products by brand
+export const getAllProductsByBrand =
+  (page, limit, brandID) => async (dispatch) => {
+    try {
+      const response = await useGetData(
+        `/api/v1/products?limit=${limit}&brand=${brandID}&page=${page}`
+      );
+      dispatch({
+        type: GET_ALL_PRODUCTS_BRAND,
+        payload: response,
+        loading: true,
+      });
+    } catch (e) {
+      dispatch({
+        type: GET_ALL_PRODUCTS_BRAND,
         payload: e.response,
       });
     }

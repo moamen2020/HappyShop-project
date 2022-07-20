@@ -20,7 +20,7 @@ const BrandFeatured = ({ title, btntitle, pathText }) => {
           {loading === false ? (
             brand.data ? (
               brand.data.slice(0, 3).map((item, index) => {
-                return <BrandCard key={index} img={item.image} />;
+                return <BrandCard id={item._id} key={index} img={item.image} />;
               })
             ) : (
               <h3>لا يوجد ماركات</h3>

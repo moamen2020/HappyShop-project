@@ -7,6 +7,7 @@ import {
   DELETE_PRODUCT,
   UPDATE_PRODUCT,
   GET_ALL_PRODUCTS_CATEGORY,
+  GET_ALL_PRODUCTS_BRAND,
 } from "../type";
 
 const initial = {
@@ -17,6 +18,7 @@ const initial = {
   deleteProduct: [],
   updateProduct: [],
   allProductCat: [],
+  allProductBrand: [],
   loading: true,
 };
 
@@ -63,7 +65,11 @@ const productsReducer = (state = initial, action) => {
         loading: true,
         allProductCat: action.payload,
       };
-
+    case GET_ALL_PRODUCTS_BRAND:
+      return {
+        loading: true,
+        allProductBrand: action.payload,
+      };
     case GET_ERROR:
       return {
         products: true,

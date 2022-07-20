@@ -10,6 +10,7 @@ import AllBrandPage from "./Pages/Brand/AllBrandPage";
 import ShopProductsPage from "./Pages/Products/ShopProductsPage";
 import ProductDetalisPage from "./Pages/Products/ProductDetalisPage";
 import ProductsByCategory from "./Pages/Products/ProductsByCategory";
+import ProductsByBrand from "./Pages/Products/ProductsByBrand";
 import CartPage from "./Pages/Cart/CartPage";
 import ChoosePayMethoudPage from "./Pages/Checkout/ChoosePayMethoudPage";
 import AdminAllProductsPage from "./Pages/Admin/AdminAllProductsPage";
@@ -62,6 +63,7 @@ function App() {
             path="/products/category/:id"
             element={<ProductsByCategory />}
           />
+          <Route path="/products/brand/:id" element={<ProductsByBrand />} />
 
           {/* Protected => Admin */}
           <Route element={<ProtectedRoute auth={isAdmin} />}>

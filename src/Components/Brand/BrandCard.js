@@ -1,6 +1,8 @@
 import React from "react";
 import { Card, Col } from "react-bootstrap";
-const BrandCard = ({ img }) => {
+import { Link } from "react-router-dom";
+
+const BrandCard = ({ img, id }) => {
   return (
     <Col
       xs="6"
@@ -19,7 +21,9 @@ const BrandCard = ({ img }) => {
           backgroundColor: "#FFFFFF",
         }}
       >
-        <Card.Img style={{ width: "100%", height: "151px" }} src={img} />
+        <Link to={`/products/brand/${id}`} style={{ textDecoration: "none" }}>
+          <Card.Img style={{ width: "100%", height: "151px" }} src={img} />
+        </Link>
       </Card>
     </Col>
   );
