@@ -42,6 +42,11 @@ const cartReducer = (state = inital, action) => {
         ...state,
         updateItem: action.payload,
       };
+    case APPALY_COUPON_CART:
+      return {
+        ...state,
+        applayCoupon: action.payload,
+      };
     default:
       return state;
   }

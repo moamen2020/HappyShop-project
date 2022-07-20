@@ -92,3 +92,20 @@ export const updateCartItem = (id, body) => async (dispatch) => {
     });
   }
 };
+
+//update cart Item
+export const applayCoupnCart = (body) => async (dispatch) => {
+  try {
+    const response = await useUpdateData(`/api/v1/cart/applyCoupon`, body);
+    // console.log(response)
+    dispatch({
+      type: APPALY_COUPON_CART,
+      payload: response,
+    });
+  } catch (e) {
+    dispatch({
+      type: APPALY_COUPON_CART,
+      payload: e.response,
+    });
+  }
+};
