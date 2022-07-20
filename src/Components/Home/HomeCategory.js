@@ -17,6 +17,7 @@ const HomeCategory = ({ title, btntitle, pathText }) => {
               return (
                 <CategoryCard
                   key={index}
+                  id={item._id}
                   title={item.name}
                   img={item.image}
                   background={colors[index]}

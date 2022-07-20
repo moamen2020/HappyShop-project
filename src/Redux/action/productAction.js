@@ -11,6 +11,7 @@ import {
   GET_PRODUCTS_LIKE,
   DELETE_PRODUCT,
   UPDATE_PRODUCT,
+  GET_ALL_PRODUCTS_CATEGORY,
 } from "../type";
 
 // Create new Product
@@ -46,6 +47,26 @@ export const getAllProducts = (limit) => async (dispatch) => {
     });
   }
 };
+
+//get all products by category
+export const getAllProductsByCategory =
+  (page, limit, categoryID) => async (dispatch) => {
+    try {
+      const response = await useGetData(
+        `/api/v1/products?limit=${limit}&category=${categoryID}&page=${page}`
+      );
+      dispatch({
+        type: GET_ALL_PRODUCTS_CATEGORY,
+        payload: response,
+        loading: true,
+      });
+    } catch (e) {
+      dispatch({
+        type: GET_ALL_PRODUCTS_CATEGORY,
+        payload: e.response,
+      });
+    }
+  };
 
 // Get all Product with page number
 export const getAllProductsPage = (page, limit) => async (dispatch) => {

@@ -6,6 +6,7 @@ import {
   GET_PRODUCTS_LIKE,
   DELETE_PRODUCT,
   UPDATE_PRODUCT,
+  GET_ALL_PRODUCTS_CATEGORY,
 } from "../type";
 
 const initial = {
@@ -15,6 +16,7 @@ const initial = {
   likeProducts: [],
   deleteProduct: [],
   updateProduct: [],
+  allProductCat: [],
   loading: true,
 };
 
@@ -56,6 +58,12 @@ const productsReducer = (state = initial, action) => {
         updateProduct: action.payload,
         loading: false,
       };
+    case GET_ALL_PRODUCTS_CATEGORY:
+      return {
+        loading: true,
+        allProductCat: action.payload,
+      };
+
     case GET_ERROR:
       return {
         products: true,

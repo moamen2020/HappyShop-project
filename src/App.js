@@ -9,6 +9,7 @@ import AllCategoryList from "./Pages/Category/AllCategoryList";
 import AllBrandPage from "./Pages/Brand/AllBrandPage";
 import ShopProductsPage from "./Pages/Products/ShopProductsPage";
 import ProductDetalisPage from "./Pages/Products/ProductDetalisPage";
+import ProductsByCategory from "./Pages/Products/ProductsByCategory";
 import CartPage from "./Pages/Cart/CartPage";
 import ChoosePayMethoudPage from "./Pages/Checkout/ChoosePayMethoudPage";
 import AdminAllProductsPage from "./Pages/Admin/AdminAllProductsPage";
@@ -57,7 +58,12 @@ function App() {
           />
           <Route path="/user/verify-code" element={<VerifyPasswordPage />} />
           <Route path="/user/reset-password" element={<ResetPasswordPage />} />
+          <Route
+            path="/products/category/:id"
+            element={<ProductsByCategory />}
+          />
 
+          {/* Protected => Admin */}
           <Route element={<ProtectedRoute auth={isAdmin} />}>
             <Route
               path="/admin/allproducts"
@@ -92,6 +98,7 @@ function App() {
             />
           </Route>
 
+          {/* Protected => User */}
           <Route element={<ProtectedRoute auth={isUser} />}>
             <Route path="/user/all-orders" element={<UserAllOrdersPage />} />
             <Route path="/user/favorite" element={<UserFavoritePage />} />

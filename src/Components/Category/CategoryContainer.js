@@ -21,6 +21,7 @@ const CategoryContainer = ({ data, loading }) => {
             data.map((item, index) => {
               return (
                 <CategoryCard
+                  id={item._id}
                   key={index}
                   title={item.name}
                   img={item.image}

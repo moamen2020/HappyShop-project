@@ -1,7 +1,8 @@
 import React from "react";
 import { Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
-const CategoryCard = ({ title, img, background }) => {
+const CategoryCard = ({ title, img, background, id }) => {
   return (
     <Col
       xs="6"
@@ -11,12 +12,17 @@ const CategoryCard = ({ title, img, background }) => {
       className="my-4 d-flex justify-content-around "
     >
       <div className="allCard mb-3 ">
-        <div
-          className="categoty-card "
-          style={{ backgroundColor: `${background}` }}
-        ></div>{" "}
-        <img alt="zcv" src={img} className="categoty-card-img" />
-        <p className="categoty-card-text my-2">{title}</p>
+        <Link
+          to={`/products/category/${id}`}
+          style={{ textDecoration: "none" }}
+        >
+          <div
+            className="categoty-card "
+            style={{ backgroundColor: `${background}` }}
+          ></div>
+          <img alt="التصنيفات" src={img} className="categoty-card-img" />
+          <p className="categoty-card-text my-2">{title}</p>
+        </Link>
       </div>
     </Col>
   );
