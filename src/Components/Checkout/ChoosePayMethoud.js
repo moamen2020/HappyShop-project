@@ -1,12 +1,13 @@
 import React from "react";
-import { Col, Row, ToastContainer } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
+import { ToastContainer } from "react-toastify";
 import OrderPayCashHook from "../../hook/checkout/order-pay-cash-hook";
 import ViewAddressesHook from "./../../hook/user/view-addresses-hook";
 
 const ChoosePayMethoud = () => {
   const [res] = ViewAddressesHook();
 
-  const [handelChooseAddress, addressDetalis, handelCreateOrderCash] =
+  const [addressDetalis, handelChooseAddress, handelCreateOrderCash] =
     OrderPayCashHook();
 
   return (

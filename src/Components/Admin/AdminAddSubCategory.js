@@ -14,12 +14,6 @@ const AdminAddSubCategory = () => {
     onChangeName,
   ] = AddSubcategoryHook();
 
-  console.log("===================================");
-  console.log("AdminAddSubCategory");
-  console.log(category);
-  console.log("AdminAddSubCategory");
-  console.log("===================================");
-
   return (
     <div>
       <Row className="justify-content-start ">

@@ -71,7 +71,7 @@ const OrderPayCashHook = () => {
       if (resOrserCash && resOrserCash.status === 201) {
         notify("تم انشاء طلبك بنجاح", "success");
         setTimeout(() => {
-          navigate("/user/allorders");
+          navigate("/user/all-orders");
         }, 1500);
       } else {
         notify("فشل فى اكمال الطلب من فضلك حاول مره اخرى", "warn");

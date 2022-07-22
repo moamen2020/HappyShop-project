@@ -1,9 +1,5 @@
 import { CREATE_ORDER_CASH } from "../type";
-import { useGetData } from "../../hooks/useGetData";
-import {
-  useInsertData,
-  useInsertDataWithImage,
-} from "../../hooks/useInsertData";
+import { useInsertData } from "../../hooks/useInsertData";
 
 //create order cash fro user
 export const createOrderCash = (id, body) => async (dispatch) => {
