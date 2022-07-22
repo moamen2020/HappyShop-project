@@ -48,7 +48,7 @@ const UserAllOrdersItem = ({ orderItem }) => {
         </Col>
         <Col xs="6" className="d-flex justify-content-end">
           <div>
-            <div className="barnd-text">
+            <div className="barnd-text m-2">
               {orderItem.totalOrderPrice || 0} جنية
             </div>
           </div>

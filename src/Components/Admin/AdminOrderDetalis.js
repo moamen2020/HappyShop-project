@@ -1,13 +1,26 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
-import CartItem from "../Cart/CartItem";
+import { ToastContainer } from "react-toastify";
+import { useParams } from "react-router-dom";
+import UserAllOrdersItem from "../User/UserAllOrdersItem";
+import ChangeOrderStatusHook from "../../hook/admin/change-order-status-hook";
+import GetOrderDetalisHook from "../../hook/admin/get-order-detalis-hook";
 
 const AdminOrderDetalis = () => {
+  const { id } = useParams();
+  const [orderData, cartItems] = GetOrderDetalisHook(id);
+
+  const [
+    formatDate,
+    onChangePaid,
+    changePayOrder,
+    onChangeDeliver,
+    changeDeliverOrder,
+  ] = ChangeOrderStatusHook(id);
+
   return (
     <div>
-      <div className="admin-content-text">تفاصيل الطلب رقم #231231</div>
-      <CartItem />
-      <CartItem />
+      <UserAllOrdersItem orderItem={orderData} />
 
       <Row className="justify-content-center mt-4 user-data">
         <Col xs="12" className=" d-flex">
@@ -32,7 +45,7 @@ const AdminOrderDetalis = () => {
             }}
             className="mx-2"
           >
-            احمد عبداللة
+            {orderData ? (orderData.user ? orderData.user.name : "") : ""}
           </div>
         </Col>
 
@@ -55,7 +68,7 @@ const AdminOrderDetalis = () => {
             }}
             className="mx-2"
           >
-            0021313432423
+            {orderData ? (orderData.user ? orderData.user.phone : "") : ""}
           </div>
         </Col>
         <Col xs="12" className="d-flex">
@@ -77,28 +90,50 @@ const AdminOrderDetalis = () => {
             }}
             className="mx-2"
           >
-            ahmed@gmail.com
+            {orderData ? (orderData.user ? orderData.user.email : "") : ""}
           </div>
         </Col>
-        <div className=" d-inline px-4 border text-center pt-2">
-          المجموع ٤٠٠٠ جنيه
-        </div>
         <div className="d-flex mt-2 justify-content-center">
-          <select
-            name="languages"
-            id="lang"
-            className="select input-form-area mt-1  text-center px-2 w-50"
-          >
-            <option value="val">حالة الطلب</option>
-            <option value="val2">قيد التنفيذ</option>
-            <option value="val2">تم الانتهاء</option>
-            <option value="val2">الغاء</option>
-          </select>
-          <button className="btn-a px-3 d-inline mx-2 ">حفظ </button>
+          <div>
+            <select
+              name="pay"
+              id="paid"
+              onChange={onChangePaid}
+              className="select input-form-area mt-1  text-center w-50"
+            >
+              <option value="0">الدفع</option>
+              <option value="true">تم</option>
+              <option value="false">لم يتم</option>
+            </select>
+            <button
+              onClick={changePayOrder}
+              className="btn-a px-2 d-inline mx-1 "
+            >
+              حفظ
+            </button>
+          </div>
+          <div>
+            <select
+              onChange={onChangeDeliver}
+              name="deliver"
+              id="deliver"
+              className="select input-form-area mt-1  text-center  w-50"
+            >
+              <option value="0">التوصيل</option>
+              <option value="true">تم</option>
+              <option value="false">لم يتم</option>
+            </select>
+            <button
+              onClick={changeDeliverOrder}
+              className="btn-a px-2 d-inline mx-1 "
+            >
+              حفظ
+            </button>
+          </div>
         </div>
       </Row>
+      <ToastContainer />
     </div>
   );
 };
-
 export default AdminOrderDetalis;
