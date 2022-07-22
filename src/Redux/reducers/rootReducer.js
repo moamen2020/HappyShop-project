@@ -9,6 +9,7 @@ import addToWishListReducer from "./wishListReducer";
 import couponReducer from "./couponReducer";
 import userAddressesReducer from "./userAddressesReducer";
 import cartReducer from "./cartReducer";
+import checkoutReducer from "./checkoutReducer";
 
 export default combineReducers({
   allCategory: categoryReducer,
@@ -21,4 +22,5 @@ export default combineReducers({
   couponReducer: couponReducer,
   userAddressesReducer: userAddressesReducer,
   cartReducer: cartReducer,
+  checkoutReducer: checkoutReducer,
 });

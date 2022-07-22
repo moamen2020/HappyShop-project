@@ -1,9 +1,13 @@
 import React from "react";
 import { Col, Row, ToastContainer } from "react-bootstrap";
+import OrderPayCashHook from "../../hook/checkout/order-pay-cash-hook";
 import ViewAddressesHook from "./../../hook/user/view-addresses-hook";
 
 const ChoosePayMethoud = () => {
   const [res] = ViewAddressesHook();
+
+  const [handelChooseAddress, addressDetalis, handelCreateOrderCash] =
+    OrderPayCashHook();
 
   return (
     <div>
@@ -45,7 +49,7 @@ const ChoosePayMethoud = () => {
               name="address"
               id="address"
               className="select mt-1 px-2 "
-              // onChange={handelChooseAddress}
+              onChange={handelChooseAddress}
             >
               <option value="0">اختر عنوان للشحن</option>
               {res.data ? (
@@ -69,7 +73,10 @@ const ChoosePayMethoud = () => {
       <Row>
         <Col xs="12" className="d-flex justify-content-end">
           <div className="product-price d-inline   border">34000 جنية</div>
-          <div className="product-cart-add px-3 pt-2 d-inline me-2">
+          <div
+            onClick={handelCreateOrderCash}
+            className="product-cart-add px-3 pt-2 d-inline me-2"
+          >
             اتمام الشراء
           </div>
         </Col>
