@@ -6,13 +6,15 @@ import ApplayCouponHook from "../../hook/cart/applay-coupon-hook";
 import DeleteCartHook from "../../hook/cart/delete-cart-hook";
 
 const CartCheckout = ({
+  cartItems,
   couponNameRes,
   totalCartPriceAfterDiscount,
   totalCartPrice,
 }) => {
   const [handelDeleteCart] = DeleteCartHook();
 
-  const [couponName, onChangeCoupon, handelSubmitCoupon] = ApplayCouponHook();
+  const [couponName, onChangeCoupon, handelSubmitCoupon, handelCheckout] =
+    ApplayCouponHook(cartItems);
 
   useEffect(() => {
     if (couponNameRes) {
@@ -39,13 +41,14 @@ const CartCheckout = ({
             ? `${totalCartPrice} جنيه ... بعد الخصم ${totalCartPriceAfterDiscount} `
             : `${totalCartPrice} جنيه`}
         </div>
-        <Link
-          to="/order/paymethoud"
-          style={{ textDecoration: "none" }}
+
+        <button
           className="product-cart-add  d-inline "
+          onClick={handelCheckout}
         >
-          <button className="product-cart-add w-100 px-2"> اتمام الشراء</button>
-        </Link>
+          اتمام الشراء
+        </button>
+
         <button
           onClick={handelDeleteCart}
           className="product-cart-add w-100 px-2 my-1"

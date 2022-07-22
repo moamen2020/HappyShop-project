@@ -29,6 +29,7 @@ const CartPage = () => {
         </Col>
         <Col xs="6" md="3">
           <CartCheckout
+            cartItems={cartItems}
             couponNameRes={couponNameRes}
             totalCartPriceAfterDiscount={totalCartPriceAfterDiscount}
             totalCartPrice={totalCartPrice}

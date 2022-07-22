@@ -52,7 +52,6 @@ function App() {
           <Route path="/products" element={<ShopProductsPage />} />
           <Route path="/products/:id" element={<ProductDetalisPage />} />
           <Route path="/cart" element={<CartPage />} />
-          <Route path="/order/paymethoud" element={<ChoosePayMethoudPage />} />
           <Route
             path="/user/forget-password"
             element={<ForgotPasswordPage />}
@@ -106,6 +105,10 @@ function App() {
             <Route path="/user/favorite" element={<UserFavoritePage />} />
             <Route path="/user/address" element={<UserAllAddressPage />} />
             <Route path="/user/add-address" element={<UserAddAddressPage />} />
+            <Route
+              path="/order/paymethoud"
+              element={<ChoosePayMethoudPage />}
+            />
             <Route
               path="/user/edit-address/:id"
               element={<UserEditAddressPage />}
