@@ -1,5 +1,5 @@
 import axios from "axios";
 
-const baseURL = axios.create({ baseURL: "http://127.0.0.1:8000" });
+const baseURL = axios.create({ baseURL: "https://back-end-ecommerce-after-login.herokuapp.com" });
 
 export default baseURL;

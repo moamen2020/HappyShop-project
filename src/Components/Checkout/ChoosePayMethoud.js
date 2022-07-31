@@ -1,14 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
 import OrderPayCashHook from "../../hook/checkout/order-pay-cash-hook";
+import OrderPayCardHook from "./../../hook/checkout/order-pay-card-hook";
 import ViewAddressesHook from "./../../hook/user/view-addresses-hook";
+import GetAllUserCartHook from "../../hook/cart/get-all-user-cart-hook";
+import notify from "../../hook/useNotifaction";
 
 const ChoosePayMethoud = () => {
   const [res] = ViewAddressesHook();
 
   const [addressDetalis, handelChooseAddress, handelCreateOrderCash] =
     OrderPayCashHook();
+  const [handelCreateOrderCARD] = OrderPayCardHook(addressDetalis);
+
+  const [, , totalCartPrice, , totalCartPriceAfterDiscount] =
+    GetAllUserCartHook();
+
+  const [type, setType] = useState("");
+  const changeMathoud = (e) => {
+    setType(e.target.value);
+  };
+
+  const handelPay = () => {
+    if (type === "CARD") {
+      console.log("order card");
+      handelCreateOrderCARD();
+    } else if (type === "CASH") {
+      console.log("order cash");
+      handelCreateOrderCash();
+    } else {
+      notify("من فضلك اختر طريقة دفع", "warn");
+    }
+  };
 
   return (
     <div>
@@ -17,6 +41,7 @@ const ChoosePayMethoud = () => {
         <Row className="d-flex justify-content-between ">
           <Col xs="12" className="my-2">
             <input
+              onChange={changeMathoud}
               name="group"
               id="group1"
               type="radio"
@@ -73,9 +98,13 @@ const ChoosePayMethoud = () => {
 
       <Row>
         <Col xs="12" className="d-flex justify-content-end">
-          <div className="product-price d-inline   border">34000 جنية</div>
+          <div className="product-price d-inline   border">
+            {totalCartPriceAfterDiscount >= 1
+              ? `${totalCartPrice} جنيه ... بعد الخصم ${totalCartPriceAfterDiscount} `
+              : `${totalCartPrice} جنيه`}
+          </div>
           <div
-            onClick={handelCreateOrderCash}
+            onClick={handelPay}
             className="product-cart-add px-3 pt-2 d-inline me-2"
           >
             اتمام الشراء
